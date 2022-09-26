@@ -18,7 +18,7 @@ CREATE TABLE Service
 	status TINYINT NOT NULL,
 
 	CONSTRAINT sPrice CHECK ([servicePrice] > 0),
-	CONSTRAINT serviceKey PRIMARY KEY([ServiceID])
+	CONSTRAINT serviceKey PRIMARY KEY([ServiceID]) 
 )
 GO
 
@@ -78,7 +78,10 @@ CREATE TABLE Patient
 	reason NVARCHAR(500),
 
 	CONSTRAINT patientKey PRIMARY KEY([patientID]),
-	CONSTRAINT people_patient FOREIGN KEY([patientID]) REFERENCES [dbo].[People]([peopleID]),
+	CONSTRAINT people_patient FOREIGN KEY([patientID]) 
+		REFERENCES [dbo].[People]([peopleID])
+		ON DELETE SET NULL
+		ON UPDATE CASCADE,
 )
 GO
 
@@ -88,7 +91,10 @@ CREATE TABLE Employee
 	positon NVARCHAR(255),
 
 	CONSTRAINT employeeKey PRIMARY KEY([employeeID]),
-	CONSTRAINT people_employee FOREIGN KEY([employeeID]) REFERENCES [dbo].[People]([peopleID]),
+	CONSTRAINT people_employee FOREIGN KEY([employeeID]) 
+		REFERENCES [dbo].[People]([peopleID])
+		ON DELETE SET NULL
+		ON UPDATE CASCADE,
 )
 GO
 
@@ -102,8 +108,14 @@ CREATE TABLE usingService
 	status TINYINT NOT NULL,
 
 	CONSTRAINT usingPKEY PRIMARY KEY([patientID],[serviceID]),
-	CONSTRAINT pUsingFKEY FOREIGN KEY([patientID]) REFERENCES [dbo].[Patient]([patientID]),
-	CONSTRAINT sUsingFKEY FOREIGN KEY([serviceID]) REFERENCES [dbo].[Service]([serviceID]),
+	CONSTRAINT pUsingFKEY FOREIGN KEY([patientID]) 
+		REFERENCES [dbo].[Patient]([patientID])
+		ON DELETE SET NULL
+		ON UPDATE CASCADE,
+	CONSTRAINT sUsingFKEY FOREIGN KEY([serviceID]) 
+		REFERENCES [dbo].[Service]([serviceID])
+		ON DELETE SET NULL
+		ON UPDATE CASCADE,
 	CONSTRAINT using# CHECK ([quantity] > 0)
 )
 GO
@@ -114,7 +126,10 @@ GO
 
 ALTER TABLE [dbo].[Employee] 
 ADD CONSTRAINT belongDepartment 
-FOREIGN KEY (departmentID) REFERENCES [dbo].[Department]([departmentID])
+FOREIGN KEY (departmentID) 
+	REFERENCES [dbo].[Department]([departmentID])
+	ON DELETE SET NULL
+	ON UPDATE CASCADE
 GO
 
 CREATE TABLE Receipt
@@ -138,9 +153,18 @@ CREATE TABLE Pay
 	createdAt DATE NOT NULL,
 
 	CONSTRAINT payKey PRIMARY KEY([patientID],[employeeID],[receiptID]),
-	CONSTRAINT patientPay FOREIGN KEY([patientID]) REFERENCES [dbo].[Patient]([patientID]),
-	CONSTRAINT employeePay FOREIGN KEY([employeeID]) REFERENCES [dbo].[Employee]([employeeID]),
-	CONSTRAINT receiptPay FOREIGN KEY([receiptID]) REFERENCES [dbo].[Receipt]([receiptID]),
+	CONSTRAINT patientPay FOREIGN KEY([patientID]) 
+		REFERENCES [dbo].[Patient]([patientID])
+		ON DELETE SET NULL
+		ON UPDATE CASCADE,
+	CONSTRAINT employeePay FOREIGN KEY([employeeID]) 
+		REFERENCES [dbo].[Employee]([employeeID])
+		ON DELETE SET NULL
+		ON UPDATE CASCADE,
+	CONSTRAINT receiptPay FOREIGN KEY([receiptID]) 
+		REFERENCES [dbo].[Receipt]([receiptID])
+		ON DELETE SET NULL
+		ON UPDATE CASCADE,
 )
 GO
 
@@ -162,8 +186,14 @@ CREATE TABLE Examination
 	createdAt DATE NOT NULL,
 
 	CONSTRAINT examKey PRIMARY KEY([patientID],[employeeID],[examinateID]),
-	CONSTRAINT patientExam FOREIGN KEY ([patientID]) REFERENCES [dbo].[Patient]([patientID]),
-	CONSTRAINT employeeExam FOREIGN KEY ([employeeID]) REFERENCES [dbo].[Employee]([employeeID]),
+	CONSTRAINT patientExam FOREIGN KEY ([patientID]) 
+		REFERENCES [dbo].[Patient]([patientID])
+		ON DELETE SET NULL
+		ON UPDATE CASCADE,
+	CONSTRAINT employeeExam FOREIGN KEY ([employeeID]) 
+		REFERENCES [dbo].[Employee]([employeeID])
+		ON DELETE SET NULL
+		ON UPDATE CASCADE,
 	CONSTRAINT examID UNIQUE ([examinateID]),
 	CONSTRAINT gtZero CHECK ([height] > 0 AND [weight] > 0 AND [temperature] > 0 AND [breathing] > 0 AND [veins] > 0)
 )
@@ -178,8 +208,14 @@ CREATE TABLE Prescription
 	createdAt DATE NOT NULL,
 
 	CONSTRAINT preKey PRIMARY KEY ([patientID],[employeeID]),
-	CONSTRAINT patientPrescription FOREIGN KEY ([patientID]) REFERENCES [dbo].[Patient]([patientID]),
-	CONSTRAINT employeePrescription FOREIGN KEY ([employeeID]) REFERENCES [dbo].[Employee]([employeeID])
+	CONSTRAINT patientPrescription FOREIGN KEY ([patientID]) 
+		REFERENCES [dbo].[Patient]([patientID])
+		ON DELETE SET NULL
+		ON UPDATE CASCADE,
+	CONSTRAINT employeePrescription FOREIGN KEY ([employeeID]) 
+		REFERENCES [dbo].[Employee]([employeeID])
+		ON DELETE SET NULL
+		ON UPDATE CASCADE
 )
 GO
 
@@ -191,9 +227,18 @@ CREATE TABLE Pre_Medicines
 	medicine VARCHAR(20),
 
 	CONSTRAINT pre_medicineKey PRIMARY KEY ([patientID],[employeeID],[medicine]),
-	CONSTRAINT patientPre_Med FOREIGN KEY ([patientID]) REFERENCES [dbo].[Patient]([patientID]),
-	CONSTRAINT employeePre_Med FOREIGN KEY ([employeeID]) REFERENCES [dbo].[Employee]([employeeID]),
-	CONSTRAINT medicinePre_Med FOREIGN KEY ([medicine]) REFERENCES [dbo].[Medicine]([medicineID])
+	CONSTRAINT patientPre_Med FOREIGN KEY ([patientID]) 
+		REFERENCES [dbo].[Patient]([patientID])
+		ON DELETE SET NULL
+		ON UPDATE CASCADE,
+	CONSTRAINT employeePre_Med FOREIGN KEY ([employeeID]) 
+		REFERENCES [dbo].[Employee]([employeeID])
+		ON DELETE SET NULL
+		ON UPDATE CASCADE,
+	CONSTRAINT medicinePre_Med FOREIGN KEY ([medicine]) 
+		REFERENCES [dbo].[Medicine]([medicineID])
+		ON DELETE SET NULL
+		ON UPDATE CASCADE
 )
 GO
 
@@ -205,8 +250,14 @@ CREATE TABLE Relatives
 
 	CONSTRAINT relativeKey PRIMARY KEY([personA],[personB]),
 	CONSTRAINT twoPeople CHECK([personA] <> [personB]),
-	CONSTRAINT existPerson1 FOREIGN KEY([personA]) REFERENCES [dbo].[People]([peopleID]),
-	CONSTRAINT existPerson2 FOREIGN KEY([personB]) REFERENCES [dbo].[People]([peopleID])
+	CONSTRAINT existPerson1 FOREIGN KEY([personA]) 
+		REFERENCES [dbo].[People]([peopleID])
+		ON DELETE SET NULL
+		ON UPDATE CASCADE,
+	CONSTRAINT existPerson2 FOREIGN KEY([personB]) 
+		REFERENCES [dbo].[People]([peopleID])
+		ON DELETE SET NULL
+		ON UPDATE CASCADE
 )
 GO
 
@@ -227,6 +278,9 @@ CREATE TABLE Account
 	role VARCHAR(20)
 
 	CONSTRAINT accountKey PRIMARY KEY ([accountId]),
-	CONSTRAINT roleFkey FOREIGN KEY([role]) REFERENCES [dbo].[Roles]([roleID])
+	CONSTRAINT roleFkey FOREIGN KEY([role]) 
+		REFERENCES [dbo].[Roles]([roleID])
+		ON DELETE SET NULL
+		ON UPDATE CASCADE
 )
 GO
