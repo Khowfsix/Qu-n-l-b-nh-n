@@ -1,4 +1,10 @@
-﻿CREATE DATABASE QuanLiHoSoBenhAnNgoaiTru
+﻿USE [master] 
+GO
+
+DROP DATABASE QuanLiHoSoBenhAnNgoaiTru
+GO
+
+CREATE DATABASE QuanLiHoSoBenhAnNgoaiTru
 GO
 
 USE [QuanLiHoSoBenhAnNgoaiTru]
@@ -39,6 +45,7 @@ CREATE TABLE Department
 
 	CONSTRAINT departmentKey PRIMARY KEY ([departmentID])
 )
+GO
 
 CREATE TABLE People
 (
@@ -55,7 +62,7 @@ CREATE TABLE People
 	
 	CONSTRAINT peopleKey PRIMARY KEY([peopleID]),
 	CONSTRAINT sexCheck CHECK([sex]='M' OR [sex]='F' OR [sex]='O'),
-	CONSTRAINT birthdayCheck CHECK ([birthDay] < CURDATE()),
+	CONSTRAINT birthdayCheck CHECK ([birthDay] < GETDATE()),
 	CONSTRAINT chk_phone CHECK ([phone] not like '%[^0-9]%'),
 )
 GO
@@ -132,6 +139,7 @@ CREATE TABLE Pay
 	CONSTRAINT employeePay FOREIGN KEY([employeeID]) REFERENCES [dbo].[Employee]([employeeID]),
 	CONSTRAINT receiptPay FOREIGN KEY([receiptID]) REFERENCES [dbo].[Receipt]([receiptID]),
 )
+GO
 
 CREATE TABLE Examination
 (
@@ -150,12 +158,13 @@ CREATE TABLE Examination
 	status TINYINT NOT NULL,
 	createdAt DATE NOT NULL,
 
-	CONSTRAINT examKey PRIMARY KEY([patientID],[employeeID],[employeeID]),
+	CONSTRAINT examKey PRIMARY KEY([patientID],[employeeID],[examinateID]),
 	CONSTRAINT patientExam FOREIGN KEY ([patientID]) REFERENCES [dbo].[Patient]([patientID]),
 	CONSTRAINT employeeExam FOREIGN KEY ([employeeID]) REFERENCES [dbo].[Employee]([employeeID]),
 	CONSTRAINT examID UNIQUE ([examinateID]),
 	CONSTRAINT gtZero CHECK ([height] > 0 AND [weight] > 0 AND [temperature] > 0 AND [breathing] > 0 AND [veins] > 0)
 )
+GO
 
 CREATE TABLE Prescription
 (
@@ -169,6 +178,7 @@ CREATE TABLE Prescription
 	CONSTRAINT patientPrescription FOREIGN KEY ([patientID]) REFERENCES [dbo].[Patient]([patientID]),
 	CONSTRAINT employeePrescription FOREIGN KEY ([employeeID]) REFERENCES [dbo].[Employee]([employeeID])
 )
+GO
 
 --Multivalue attribute
 CREATE TABLE Pre_Medicines
@@ -182,3 +192,4 @@ CREATE TABLE Pre_Medicines
 	CONSTRAINT employeePre_Med FOREIGN KEY ([employeeID]) REFERENCES [dbo].[Employee]([employeeID]),
 	CONSTRAINT medicinePre_Med FOREIGN KEY ([medicine]) REFERENCES [dbo].[Medicine]([medicineID])
 )
+GO
