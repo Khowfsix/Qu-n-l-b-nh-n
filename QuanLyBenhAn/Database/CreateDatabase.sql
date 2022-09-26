@@ -230,4 +230,3 @@ CREATE TABLE Account
 	CONSTRAINT roleFkey FOREIGN KEY([role]) REFERENCES [dbo].[Roles]([roleID])
 )
 GO
-
