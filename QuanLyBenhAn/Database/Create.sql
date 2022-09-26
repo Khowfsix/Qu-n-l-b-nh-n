@@ -58,10 +58,13 @@ CREATE TABLE People
 	address NVARCHAR(510) NOT NULL,
 	phone VARCHAR(15) NOT NULL,
 	cardID VARCHAR(15) NULL UNIQUE,
+	role TINYINT NOT NULL,
 	status TINYINT NOT NULL,
 	
 	CONSTRAINT peopleKey PRIMARY KEY([peopleID]),
 	CONSTRAINT sexCheck CHECK([sex]='M' OR [sex]='F' OR [sex]='O'),
+	-- thân nhân = 0; bệnh nhân = 1; nhân viên = 2
+	CONSTRAINT role CHECK ([role] BETWEEN 0 AND 2),
 	CONSTRAINT birthdayCheck CHECK ([birthDay] < GETDATE()),
 	CONSTRAINT chk_phone CHECK ([phone] not like '%[^0-9]%'),
 )
@@ -191,5 +194,18 @@ CREATE TABLE Pre_Medicines
 	CONSTRAINT patientPre_Med FOREIGN KEY ([patientID]) REFERENCES [dbo].[Patient]([patientID]),
 	CONSTRAINT employeePre_Med FOREIGN KEY ([employeeID]) REFERENCES [dbo].[Employee]([employeeID]),
 	CONSTRAINT medicinePre_Med FOREIGN KEY ([medicine]) REFERENCES [dbo].[Medicine]([medicineID])
+)
+GO
+
+--cycle relationship of relatives
+CREATE TABLE Relatives
+(
+	personA VARCHAR(20),
+	personB VARCHAR(20),
+
+	CONSTRAINT relativeKey PRIMARY KEY([personA],[personB]),
+	CONSTRAINT twoPeople CHECK([personA] <> [personB]),
+	CONSTRAINT existPerson1 FOREIGN KEY([personA]) REFERENCES [dbo].[People]([peopleID]),
+	CONSTRAINT existPerson2 FOREIGN KEY([personB]) REFERENCES [dbo].[People]([peopleID])
 )
 GO
