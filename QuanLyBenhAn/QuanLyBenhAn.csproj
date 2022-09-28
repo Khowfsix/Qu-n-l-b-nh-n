@@ -72,7 +72,8 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Database\CreateDatabase.sql" />
-    <Content Include="Database\SQLQuery2.sql" />
+    <Content Include="Database\CreateTrigger.sql" />
+    <Content Include="Database\CreateView.sql" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="View\" />
