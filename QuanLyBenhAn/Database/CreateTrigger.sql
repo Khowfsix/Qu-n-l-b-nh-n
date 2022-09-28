@@ -1,42 +1,85 @@
-USE [QuanLiHoSoBenhAnNgoaiTru] 
+USE [QuanLiHoSoBenhAnNgoaiTru];
 GO
 
 --delete trigger
 
 -- on service
-DROP TRIGGER [dbo].[deleteService]
-
-CREATE TRIGGER deleteService
+-- change status of service to 0
+CREATE TRIGGER [deleteService]
 ON [dbo].[Service]
-AFTER DELETE
-as
+INSTEAD OF DELETE
+AS
+DECLARE @delID VARCHAR(20);
+SELECT @delID = [del].[serviceID]
+FROM [Deleted] AS [del];
 BEGIN
-	ROLLBACK
-	declare @delID VARCHAR(20)
-	SELECT @delID = del.[serviceID] FROM [Deleted] del
+    UPDATE [dbo].[Service]
+    SET [Service].[status] = 0
+    WHERE [Service].[serviceID] = @delID;
+END;
+GO
 
-	UPDATE [dbo].[usingService] SET serviceID = NULL
-	WHERE [usingService].[serviceID] = (SELECT serviceID FROM deleted)
+-- on medicine
+-- ch? set 0 status c?a thu?c, nh?ng ??n thu?c ?ã có thu?c ??y thì gi? nguyên kh?i s?a, 
+-- nó ch? mang ý ngh?a là thu?c ??y không còn t?n t?i trong kho n?a
+CREATE TRIGGER [deleteMedicine]
+ON [dbo].[Medicine]
+INSTEAD OF DELETE
+AS
+DECLARE @delID VARCHAR(20);
+SELECT @delID = [del].[medicineID]
+FROM [Deleted] AS [del];
+BEGIN
+    UPDATE [dbo].[Medicine]
+    SET [Medicine].[status] = 0
+    WHERE [Medicine].[medicineID] = @delID;
+END;
+GO
 
-	UPDATE [dbo].[Service] SET [Service].[status] = 0
-	WHERE [Service].[serviceID] = (SELECT serviceID FROM deleted)
-END
+-- on department
+CREATE TRIGGER [deleteDepartment]
+ON [dbo].[Department]
+INSTEAD OF DELETE
+AS
+DECLARE @delID VARCHAR(20);
+SELECT @delID = [del].[departmentID]
+FROM [Deleted] AS [del];
+BEGIN
+    UPDATE [dbo].[Employee]
+    SET [Employee].[departmentID] = NULL
+    WHERE [Employee].[departmentID] = @delID;
 
-INSERT INTO [dbo].[Service]
-VALUES
-(   '1',   -- serviceID - varchar(20)
-    ';asdjf;lawks', -- serviceName - nvarchar(255)
-    13, -- servicePrice - int
-    1     -- status - tinyint
-    )
-INSERT INTO [dbo].[Service]
-VALUES
-(   '2',   -- serviceID - varchar(20)
-    ';asdjf;lawks', -- serviceName - nvarchar(255)
-    13, -- servicePrice - int
-    1     -- status - tinyint
-    )
+    UPDATE [dbo].[Department]
+    SET [Department].[status] = 0
+    WHERE [Department].[departmentID] = @delID;
+END;
+GO
 
-DELETE FROM [dbo].[Service]
+-- on Receipt
+-- m?c ??nh là không cho nó xóa nh?ng v?n ph?i t?o trigger vì b?ng 1 cách nào ?ó nó b? xóa thì sao :))
+CREATE TRIGGER [deleteReceipt]
+ON [dbo].[Receipt]
+FOR DELETE
+AS
+BEGIN
+    RAISERROR('Do not delete Receipt', 16, 25);
+    ROLLBACK;
+END;
+GO
 
-SELECT * FROM [dbo].[Service] AS [S]
+-- on Account
+-- cho tr??ng thoát ly kh?i t? b?n ?? tìm ki?m t? do
+CREATE TRIGGER [deleteAccount]
+ON [dbo].[Account]
+INSTEAD OF DELETE
+AS
+DECLARE @delID VARCHAR(20);
+SELECT @delID = [del].[accountId]
+FROM [Deleted] AS [del];
+BEGIN
+    UPDATE [dbo].[Account]
+    SET [Account].[status] = 0
+    WHERE [Account].[accountId] = @delID;
+END;
+
+-- on Pay
