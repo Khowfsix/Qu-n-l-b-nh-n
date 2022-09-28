@@ -212,16 +212,14 @@ CREATE TABLE [Prescription]
 (
     [patientID] VARCHAR(20),
     [employeeID] VARCHAR(20),
-    [prescriptionID] VARCHAR(20),
-    [status] TINYINT NOT NULL,
     [createdAt] DATE NOT NULL,
+    [status] TINYINT NOT NULL,
     CONSTRAINT [preKey]
         PRIMARY KEY (
                         [patientID],
-                        [employeeID]
+                        [employeeID],
+                        [createdAt]
                     ),
-    CONSTRAINT [preUnique]
-        UNIQUE ([prescriptionID]),
     CONSTRAINT [patientPrescription]
         FOREIGN KEY ([patientID])
         REFERENCES [dbo].[Patient] ([patientID]),
@@ -234,16 +232,30 @@ GO
 --Multivalue attribute
 CREATE TABLE [Pre_Medicines]
 (
-    [prescriptionID] VARCHAR(20),
+    [patientID] VARCHAR(20),
+    [employeeID] VARCHAR(20),
+    [createdAt] DATE NOT NULL,
     [medicine] VARCHAR(20),
     CONSTRAINT [pre_medicineKey]
-        PRIMARY KEY ([medicine]),
+        PRIMARY KEY (
+                        [patientID],
+                        [employeeID],
+                        [createdAt]
+                    ),
     CONSTRAINT [medicinePre_Med]
         FOREIGN KEY ([medicine])
         REFERENCES [dbo].[Medicine] ([medicineID]),
-    CONSTRAINT [presKey]
-        FOREIGN KEY ([prescriptionID])
-        REFERENCES [dbo].[Prescription] ([prescriptionID])
+    CONSTRAINT [presFkey]
+        FOREIGN KEY (
+                        [patientID],
+                        [employeeID],
+                        [createdAt]
+                    )
+        REFERENCES [dbo].[Prescription] (
+                                            [patientID],
+                                            [employeeID],
+                                            [createdAt]
+                                        )
 );
 GO
 

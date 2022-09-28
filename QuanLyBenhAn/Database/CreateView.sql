@@ -2,13 +2,12 @@ USE [QuanLiHoSoBenhAnNgoaiTru];
 GO
 
 -- create View
-DROP VIEW [dbo].[basicInfo_patient]
 CREATE VIEW [basicInfo_patient]
 AS
-SELECT [P].[peopleID] AS patientID,
-       [P].[firstName] AS patientFirstName,
-       [P].[middleName] AS patientMiddleName,
-       [P].[lastName] AS patientLastname,
+SELECT [P].[peopleID] AS [patientID],
+       [P].[firstName] AS [patientFirstName],
+       [P].[middleName] AS [patientMiddleName],
+       [P].[lastName] AS [patientLastname],
        [P].[sex],
        [P].[birthDay],
        [P].[address],
@@ -40,29 +39,26 @@ FROM [dbo].[People] AS [P]
         ON [P].[peopleID] = [E].[employeeID];
 GO
 
-DROP VIEW [dbo].[info_Doctor]
-
 CREATE VIEW [info_Doctor]
 AS
-SELECT [P].[peopleID] AS doctorID,
-       [P].[firstName] AS doctorFirstname,
-       [P].[middleName] AS doctorMiddleName,
-       [P].[lastName] AS doctorLastName,
+SELECT [P].[peopleID] AS [doctorID],
+       [P].[firstName] AS [doctorFirstname],
+       [P].[middleName] AS [doctorMiddleName],
+       [P].[lastName] AS [doctorLastName],
        [P].[sex],
        [P].[birthDay],
        [P].[address],
        [P].[phone],
        [P].[cardID],
        [E].[departmentID],
-	   [D].[departmentName]
-FROM ([dbo].[People] AS [P]
+       [D].[departmentName]
+FROM([dbo].[People] AS [P]
     INNER JOIN [dbo].[Employee] AS [E]
         ON [P].[peopleID] = [E].[employeeID])
-		JOIN [dbo].[Department] AS [D] ON ([E].[departmentID] = [D].[departmentID])
+    JOIN [dbo].[Department] AS [D]
+        ON ([E].[departmentID] = [D].[departmentID])
 WHERE [E].[positon] = 'Bác s?';
 GO
-
-DROP VIEW medicalRecord
 
 CREATE VIEW [medicalRecord]
 AS
@@ -110,10 +106,26 @@ FROM [dbo].[Medicine] AS [M]
         ON [M].[medicineID] = [PM].[medicine];
 GO
 
-CREATE VIEW Prescription_Medicines
+CREATE VIEW [Prescription_Medicines]
 AS
-SELECT * FROM 
-	(([dbo].[Prescription] AS [P] JOIN [dbo].[basicInfo_patient] AS [BIP] ON [P].[patientID] = [BIP].[patientID])
-	JOIN [dbo].[info_Doctor] AS [ID] ON [P].[employeeID] = [ID].[doctorID])
-	JOIN [dbo].[Medicines_view] AS [MV] ON [MV].[medicineID] = [P].
+SELECT [BIP].[patientID],
+       [BIP].[patientFirstName],
+       [BIP].[patientMiddleName],
+       [BIP].[patientLastname],
+       [BIP].[birthDay],
+       [ID].[doctorID],
+       [ID].[doctorFirstname],
+       [ID].[doctorMiddleName],
+       [ID].[doctorLastName],
+       [MV].[medicineID],
+       [MV].[medicineName],
+       [MV].[unit],
+       [MV].[createdAt]
+FROM(([dbo].[Prescription] AS [P]
+    JOIN [dbo].[basicInfo_patient] AS [BIP]
+        ON [P].[patientID] = [BIP].[patientID])
+    JOIN [dbo].[info_Doctor] AS [ID]
+        ON [P].[employeeID] = [ID].[doctorID])
+    JOIN [dbo].[Medicines_view] AS [MV]
+        ON ([P].[createdAt] = [MV].[createdAt]);
 GO

@@ -68,7 +68,7 @@ END;
 GO
 
 -- on Account
--- cho tr??ng thoát ly kh?i t? b?n ?? tìm ki?m t? do
+-- khi công nhân thoát ly kh?i t? b?n ?? tìm ki?m t? do
 CREATE TRIGGER [deleteAccount]
 ON [dbo].[Account]
 INSTEAD OF DELETE
