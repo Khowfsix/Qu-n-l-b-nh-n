@@ -1,0 +1,2040 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="QuanLiHoSoBenhAnNgoaiTruModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Account">
+          <Key>
+            <PropertyRef Name="accountId" />
+          </Key>
+          <Property Name="accountId" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="password" Type="varchar" MaxLength="20" />
+          <Property Name="status" Type="tinyint" />
+          <Property Name="role" Type="varchar" MaxLength="20" />
+        </EntityType>
+        <EntityType Name="Department">
+          <Key>
+            <PropertyRef Name="departmentID" />
+          </Key>
+          <Property Name="departmentID" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="departmentName" Type="nvarchar" MaxLength="255" />
+          <Property Name="status" Type="tinyint" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Employee">
+          <Key>
+            <PropertyRef Name="employeeID" />
+          </Key>
+          <Property Name="employeeID" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="position" Type="nvarchar" MaxLength="25" />
+          <Property Name="departmentID" Type="varchar" MaxLength="20" />
+        </EntityType>
+        <EntityType Name="Examination">
+          <Key>
+            <PropertyRef Name="patientID" />
+            <PropertyRef Name="employeeID" />
+            <PropertyRef Name="examinateID" />
+          </Key>
+          <Property Name="patientID" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="employeeID" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="examinateID" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="examinateDay" Type="date" Nullable="false" />
+          <Property Name="height" Type="float" Nullable="false" />
+          <Property Name="weight" Type="float" Nullable="false" />
+          <Property Name="temperature" Type="float" Nullable="false" />
+          <Property Name="breathing" Type="int" Nullable="false" />
+          <Property Name="symptom" Type="nvarchar" MaxLength="510" />
+          <Property Name="veins" Type="int" Nullable="false" />
+          <Property Name="status" Type="tinyint" Nullable="false" />
+          <Property Name="createdAt" Type="date" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Medicine">
+          <Key>
+            <PropertyRef Name="medicineID" />
+          </Key>
+          <Property Name="medicineID" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="medicineName" Type="nvarchar" MaxLength="255" />
+          <Property Name="unit" Type="nvarchar" MaxLength="255" />
+          <Property Name="medicinePrice" Type="int" />
+          <Property Name="status" Type="tinyint" Nullable="false" />
+          <Property Name="expiry" Type="int" Nullable="false" />
+          <Property Name="amount" Type="int" Nullable="false" />
+          <Property Name="createdAt" Type="datetime" />
+          <Property Name="updateAt" Type="datetime" />
+        </EntityType>
+        <EntityType Name="Patient">
+          <Key>
+            <PropertyRef Name="patientID" />
+          </Key>
+          <Property Name="patientID" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="patientJob" Type="nvarchar" MaxLength="255" />
+          <Property Name="healthInsurance#" Type="varchar" MaxLength="20" />
+          <Property Name="reason" Type="nvarchar" MaxLength="500" />
+        </EntityType>
+        <EntityType Name="Pay">
+          <Key>
+            <PropertyRef Name="patientID" />
+            <PropertyRef Name="employeeID" />
+            <PropertyRef Name="receiptID" />
+          </Key>
+          <Property Name="patientID" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="employeeID" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="receiptID" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="payTotal" Type="int" />
+          <Property Name="status" Type="tinyint" Nullable="false" />
+          <Property Name="createdAt" Type="date" Nullable="false" />
+        </EntityType>
+        <EntityType Name="People">
+          <Key>
+            <PropertyRef Name="peopleID" />
+          </Key>
+          <Property Name="peopleID" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="firstName" Type="nvarchar" MaxLength="32" Nullable="false" />
+          <Property Name="lastName" Type="nvarchar" MaxLength="32" Nullable="false" />
+          <Property Name="slug" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="sex" Type="char" MaxLength="1" Nullable="false" />
+          <Property Name="birthDay" Type="date" Nullable="false" />
+          <Property Name="address" Type="nvarchar" MaxLength="510" Nullable="false" />
+          <Property Name="phone" Type="varchar" MaxLength="15" Nullable="false" />
+          <Property Name="cardID" Type="varchar" MaxLength="15" />
+          <Property Name="role" Type="tinyint" Nullable="false" />
+          <Property Name="status" Type="tinyint" Nullable="false" />
+          <Property Name="createdAt" Type="datetime" />
+          <Property Name="updatedAt" Type="datetime" />
+        </EntityType>
+        <EntityType Name="Pre_Medicines">
+          <Key>
+            <PropertyRef Name="patientID" />
+            <PropertyRef Name="employeeID" />
+            <PropertyRef Name="medicineId" />
+            <PropertyRef Name="prescriptionId" />
+            <PropertyRef Name="pre_MedicineId" />
+          </Key>
+          <Property Name="patientID" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="employeeID" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="medicineId" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="prescriptionId" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="pre_MedicineId" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="amount" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Prescription">
+          <Key>
+            <PropertyRef Name="patientID" />
+            <PropertyRef Name="employeeID" />
+            <PropertyRef Name="medicineId" />
+            <PropertyRef Name="prescriptionId" />
+          </Key>
+          <Property Name="patientID" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="employeeID" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="medicineId" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="prescriptionId" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="createdAt" Type="date" Nullable="false" />
+          <Property Name="descriptionPrescription" Type="nvarchar" MaxLength="500" />
+          <Property Name="status" Type="tinyint" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Receipt">
+          <Key>
+            <PropertyRef Name="receiptID" />
+          </Key>
+          <Property Name="receiptID" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="receiptName" Type="nvarchar" MaxLength="255" />
+          <Property Name="status" Type="tinyint" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Relatives">
+          <Key>
+            <PropertyRef Name="relativeID" />
+            <PropertyRef Name="patientID" />
+          </Key>
+          <Property Name="relativeID" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="patientID" Type="varchar" MaxLength="20" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Roles">
+          <Key>
+            <PropertyRef Name="roleID" />
+          </Key>
+          <Property Name="roleID" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="roleName" Type="nvarchar" MaxLength="255" />
+        </EntityType>
+        <EntityType Name="Service">
+          <Key>
+            <PropertyRef Name="serviceID" />
+          </Key>
+          <Property Name="serviceID" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="serviceName" Type="nvarchar" MaxLength="255" />
+          <Property Name="servicePrice" Type="int" />
+          <Property Name="status" Type="tinyint" Nullable="false" />
+        </EntityType>
+        <EntityType Name="usingService">
+          <Key>
+            <PropertyRef Name="patientID" />
+            <PropertyRef Name="serviceID" />
+          </Key>
+          <Property Name="patientID" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="serviceID" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="useday" Type="date" />
+          <Property Name="quantity" Type="tinyint" />
+          <Property Name="status" Type="tinyint" Nullable="false" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'QuanLiHoSoBenhAnNgoaiTru.dbo.basicInfo_patient' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="basicInfo_patient">
+          <Key>
+            <PropertyRef Name="patientID" />
+            <PropertyRef Name="patientFirstName" />
+            <PropertyRef Name="patientLastname" />
+            <PropertyRef Name="sex" />
+            <PropertyRef Name="birthDay" />
+            <PropertyRef Name="address" />
+            <PropertyRef Name="phone" />
+          </Key>
+          <Property Name="patientID" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="patientFirstName" Type="nvarchar" MaxLength="32" Nullable="false" />
+          <Property Name="patientLastname" Type="nvarchar" MaxLength="32" Nullable="false" />
+          <Property Name="sex" Type="char" MaxLength="1" Nullable="false" />
+          <Property Name="birthDay" Type="date" Nullable="false" />
+          <Property Name="address" Type="nvarchar" MaxLength="510" Nullable="false" />
+          <Property Name="phone" Type="varchar" MaxLength="15" Nullable="false" />
+          <Property Name="cardID" Type="varchar" MaxLength="15" />
+          <Property Name="patientJob" Type="nvarchar" MaxLength="255" />
+          <Property Name="healthInsurance#" Type="varchar" MaxLength="20" />
+          <Property Name="reason" Type="nvarchar" MaxLength="500" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'QuanLiHoSoBenhAnNgoaiTru.dbo.Examination_view' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="Examination_view">
+          <Key>
+            <PropertyRef Name="examinateID" />
+            <PropertyRef Name="Employeename" />
+            <PropertyRef Name="Patientname" />
+            <PropertyRef Name="breathing" />
+            <PropertyRef Name="examinateDay" />
+            <PropertyRef Name="height" />
+            <PropertyRef Name="temperature" />
+            <PropertyRef Name="veins" />
+            <PropertyRef Name="weight" />
+          </Key>
+          <Property Name="examinateID" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="Employeename" Type="nvarchar" MaxLength="32" Nullable="false" />
+          <Property Name="Patientname" Type="nvarchar" MaxLength="32" Nullable="false" />
+          <Property Name="breathing" Type="int" Nullable="false" />
+          <Property Name="examinateDay" Type="date" Nullable="false" />
+          <Property Name="height" Type="float" Nullable="false" />
+          <Property Name="symptom" Type="nvarchar" MaxLength="510" />
+          <Property Name="temperature" Type="float" Nullable="false" />
+          <Property Name="veins" Type="int" Nullable="false" />
+          <Property Name="weight" Type="float" Nullable="false" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'QuanLiHoSoBenhAnNgoaiTru.dbo.info_Doctor' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="info_Doctor">
+          <Key>
+            <PropertyRef Name="doctorID" />
+            <PropertyRef Name="doctorFirstname" />
+            <PropertyRef Name="doctorLastName" />
+            <PropertyRef Name="sex" />
+            <PropertyRef Name="birthDay" />
+            <PropertyRef Name="address" />
+            <PropertyRef Name="phone" />
+          </Key>
+          <Property Name="doctorID" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="doctorFirstname" Type="nvarchar" MaxLength="32" Nullable="false" />
+          <Property Name="doctorLastName" Type="nvarchar" MaxLength="32" Nullable="false" />
+          <Property Name="sex" Type="char" MaxLength="1" Nullable="false" />
+          <Property Name="birthDay" Type="date" Nullable="false" />
+          <Property Name="address" Type="nvarchar" MaxLength="510" Nullable="false" />
+          <Property Name="phone" Type="varchar" MaxLength="15" Nullable="false" />
+          <Property Name="cardID" Type="varchar" MaxLength="15" />
+          <Property Name="departmentID" Type="varchar" MaxLength="20" />
+          <Property Name="departmentName" Type="nvarchar" MaxLength="255" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'QuanLiHoSoBenhAnNgoaiTru.dbo.info_Employee' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="info_Employee">
+          <Key>
+            <PropertyRef Name="peopleID" />
+            <PropertyRef Name="firstName" />
+            <PropertyRef Name="lastName" />
+            <PropertyRef Name="sex" />
+            <PropertyRef Name="birthDay" />
+            <PropertyRef Name="address" />
+            <PropertyRef Name="phone" />
+          </Key>
+          <Property Name="peopleID" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="firstName" Type="nvarchar" MaxLength="32" Nullable="false" />
+          <Property Name="lastName" Type="nvarchar" MaxLength="32" Nullable="false" />
+          <Property Name="sex" Type="char" MaxLength="1" Nullable="false" />
+          <Property Name="birthDay" Type="date" Nullable="false" />
+          <Property Name="address" Type="nvarchar" MaxLength="510" Nullable="false" />
+          <Property Name="phone" Type="varchar" MaxLength="15" Nullable="false" />
+          <Property Name="cardID" Type="varchar" MaxLength="15" />
+          <Property Name="position" Type="nvarchar" MaxLength="25" />
+          <Property Name="departmentID" Type="varchar" MaxLength="20" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'QuanLiHoSoBenhAnNgoaiTru.dbo.medicalRecord' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="medicalRecord">
+          <Key>
+            <PropertyRef Name="patientID" />
+            <PropertyRef Name="patientFirstName" />
+            <PropertyRef Name="patientLastname" />
+            <PropertyRef Name="sex" />
+            <PropertyRef Name="birthDay" />
+            <PropertyRef Name="doctorID" />
+            <PropertyRef Name="doctorFirstname" />
+            <PropertyRef Name="doctorLastName" />
+            <PropertyRef Name="examinateDay" />
+            <PropertyRef Name="height" />
+            <PropertyRef Name="weight" />
+            <PropertyRef Name="temperature" />
+            <PropertyRef Name="breathing" />
+            <PropertyRef Name="veins" />
+            <PropertyRef Name="createdAt" />
+          </Key>
+          <Property Name="patientID" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="patientFirstName" Type="nvarchar" MaxLength="32" Nullable="false" />
+          <Property Name="patientLastname" Type="nvarchar" MaxLength="32" Nullable="false" />
+          <Property Name="sex" Type="char" MaxLength="1" Nullable="false" />
+          <Property Name="birthDay" Type="date" Nullable="false" />
+          <Property Name="healthInsurance#" Type="varchar" MaxLength="20" />
+          <Property Name="doctorID" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="doctorFirstname" Type="nvarchar" MaxLength="32" Nullable="false" />
+          <Property Name="doctorLastName" Type="nvarchar" MaxLength="32" Nullable="false" />
+          <Property Name="examinateDay" Type="date" Nullable="false" />
+          <Property Name="height" Type="float" Nullable="false" />
+          <Property Name="weight" Type="float" Nullable="false" />
+          <Property Name="temperature" Type="float" Nullable="false" />
+          <Property Name="breathing" Type="int" Nullable="false" />
+          <Property Name="symptom" Type="nvarchar" MaxLength="510" />
+          <Property Name="veins" Type="int" Nullable="false" />
+          <Property Name="createdAt" Type="date" Nullable="false" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'QuanLiHoSoBenhAnNgoaiTru.dbo.Medicines_view' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="Medicines_view">
+          <Key>
+            <PropertyRef Name="medicineID" />
+            <PropertyRef Name="status" />
+            <PropertyRef Name="patientID" />
+            <PropertyRef Name="employeeID" />
+          </Key>
+          <Property Name="medicineID" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="medicineName" Type="nvarchar" MaxLength="255" />
+          <Property Name="unit" Type="nvarchar" MaxLength="255" />
+          <Property Name="medicinePrice" Type="int" />
+          <Property Name="status" Type="tinyint" Nullable="false" />
+          <Property Name="createdAt" Type="datetime" />
+          <Property Name="updateAt" Type="datetime" />
+          <Property Name="patientID" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="employeeID" Type="varchar" MaxLength="20" Nullable="false" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'QuanLiHoSoBenhAnNgoaiTru.dbo.pay_view' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="pay_view">
+          <Key>
+            <PropertyRef Name="patientName" />
+            <PropertyRef Name="employeeName" />
+            <PropertyRef Name="createdAt" />
+          </Key>
+          <Property Name="patientName" Type="nvarchar" MaxLength="32" Nullable="false" />
+          <Property Name="employeeName" Type="nvarchar" MaxLength="32" Nullable="false" />
+          <Property Name="receiptName" Type="nvarchar" MaxLength="255" />
+          <Property Name="payTotal" Type="int" />
+          <Property Name="createdAt" Type="date" Nullable="false" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'QuanLiHoSoBenhAnNgoaiTru.dbo.Prescription_Medicines' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="Prescription_Medicines">
+          <Key>
+            <PropertyRef Name="patientID" />
+            <PropertyRef Name="patientFirstName" />
+            <PropertyRef Name="patientLastname" />
+            <PropertyRef Name="birthDay" />
+            <PropertyRef Name="doctorID" />
+            <PropertyRef Name="doctorFirstname" />
+            <PropertyRef Name="doctorLastName" />
+            <PropertyRef Name="medicineID" />
+          </Key>
+          <Property Name="patientID" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="patientFirstName" Type="nvarchar" MaxLength="32" Nullable="false" />
+          <Property Name="patientLastname" Type="nvarchar" MaxLength="32" Nullable="false" />
+          <Property Name="birthDay" Type="date" Nullable="false" />
+          <Property Name="doctorID" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="doctorFirstname" Type="nvarchar" MaxLength="32" Nullable="false" />
+          <Property Name="doctorLastName" Type="nvarchar" MaxLength="32" Nullable="false" />
+          <Property Name="medicineID" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="medicineName" Type="nvarchar" MaxLength="255" />
+          <Property Name="unit" Type="nvarchar" MaxLength="255" />
+          <Property Name="createdAt" Type="datetime" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'QuanLiHoSoBenhAnNgoaiTru.dbo.Receipt_view' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="Receipt_view">
+          <Key>
+            <PropertyRef Name="receiptID" />
+            <PropertyRef Name="status" />
+          </Key>
+          <Property Name="receiptID" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="receiptName" Type="nvarchar" MaxLength="255" />
+          <Property Name="status" Type="tinyint" Nullable="false" />
+        </EntityType>
+        <Association Name="belongDepartment">
+          <End Role="Department" Type="Self.Department" Multiplicity="0..1" />
+          <End Role="Employee" Type="Self.Employee" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Department">
+              <PropertyRef Name="departmentID" />
+            </Principal>
+            <Dependent Role="Employee">
+              <PropertyRef Name="departmentID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="employeeExam">
+          <End Role="Employee" Type="Self.Employee" Multiplicity="1" />
+          <End Role="Examination" Type="Self.Examination" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Employee">
+              <PropertyRef Name="employeeID" />
+            </Principal>
+            <Dependent Role="Examination">
+              <PropertyRef Name="employeeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="employeePay">
+          <End Role="Employee" Type="Self.Employee" Multiplicity="1" />
+          <End Role="Pay" Type="Self.Pay" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Employee">
+              <PropertyRef Name="employeeID" />
+            </Principal>
+            <Dependent Role="Pay">
+              <PropertyRef Name="employeeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="employeePrescription">
+          <End Role="Employee" Type="Self.Employee" Multiplicity="1" />
+          <End Role="Prescription" Type="Self.Prescription" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Employee">
+              <PropertyRef Name="employeeID" />
+            </Principal>
+            <Dependent Role="Prescription">
+              <PropertyRef Name="employeeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="existPerson1">
+          <End Role="People" Type="Self.People" Multiplicity="1" />
+          <End Role="Relatives" Type="Self.Relatives" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="People">
+              <PropertyRef Name="peopleID" />
+            </Principal>
+            <Dependent Role="Relatives">
+              <PropertyRef Name="patientID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="existPerson2">
+          <End Role="People" Type="Self.People" Multiplicity="1" />
+          <End Role="Relatives" Type="Self.Relatives" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="People">
+              <PropertyRef Name="peopleID" />
+            </Principal>
+            <Dependent Role="Relatives">
+              <PropertyRef Name="relativeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="medicinePrescription">
+          <End Role="Medicine" Type="Self.Medicine" Multiplicity="1" />
+          <End Role="Prescription" Type="Self.Prescription" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Medicine">
+              <PropertyRef Name="medicineID" />
+            </Principal>
+            <Dependent Role="Prescription">
+              <PropertyRef Name="medicineId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="patientExam">
+          <End Role="Patient" Type="Self.Patient" Multiplicity="1" />
+          <End Role="Examination" Type="Self.Examination" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Patient">
+              <PropertyRef Name="patientID" />
+            </Principal>
+            <Dependent Role="Examination">
+              <PropertyRef Name="patientID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="patientPay">
+          <End Role="Patient" Type="Self.Patient" Multiplicity="1" />
+          <End Role="Pay" Type="Self.Pay" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Patient">
+              <PropertyRef Name="patientID" />
+            </Principal>
+            <Dependent Role="Pay">
+              <PropertyRef Name="patientID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="patientPrescription">
+          <End Role="Patient" Type="Self.Patient" Multiplicity="1" />
+          <End Role="Prescription" Type="Self.Prescription" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Patient">
+              <PropertyRef Name="patientID" />
+            </Principal>
+            <Dependent Role="Prescription">
+              <PropertyRef Name="patientID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="people_employee">
+          <End Role="People" Type="Self.People" Multiplicity="1" />
+          <End Role="Employee" Type="Self.Employee" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="People">
+              <PropertyRef Name="peopleID" />
+            </Principal>
+            <Dependent Role="Employee">
+              <PropertyRef Name="employeeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="people_patient">
+          <End Role="People" Type="Self.People" Multiplicity="1" />
+          <End Role="Patient" Type="Self.Patient" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="People">
+              <PropertyRef Name="peopleID" />
+            </Principal>
+            <Dependent Role="Patient">
+              <PropertyRef Name="patientID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Pre_MedicinesFK">
+          <End Role="Prescription" Type="Self.Prescription" Multiplicity="1" />
+          <End Role="Pre_Medicines" Type="Self.Pre_Medicines" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Prescription">
+              <PropertyRef Name="patientID" />
+              <PropertyRef Name="employeeID" />
+              <PropertyRef Name="medicineId" />
+              <PropertyRef Name="prescriptionId" />
+            </Principal>
+            <Dependent Role="Pre_Medicines">
+              <PropertyRef Name="patientID" />
+              <PropertyRef Name="employeeID" />
+              <PropertyRef Name="medicineId" />
+              <PropertyRef Name="prescriptionId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="pUsingFKEY">
+          <End Role="Patient" Type="Self.Patient" Multiplicity="1" />
+          <End Role="usingService" Type="Self.usingService" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Patient">
+              <PropertyRef Name="patientID" />
+            </Principal>
+            <Dependent Role="usingService">
+              <PropertyRef Name="patientID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="receiptPay">
+          <End Role="Receipt" Type="Self.Receipt" Multiplicity="1" />
+          <End Role="Pay" Type="Self.Pay" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Receipt">
+              <PropertyRef Name="receiptID" />
+            </Principal>
+            <Dependent Role="Pay">
+              <PropertyRef Name="receiptID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="roleFkey">
+          <End Role="Roles" Type="Self.Roles" Multiplicity="0..1" />
+          <End Role="Account" Type="Self.Account" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Roles">
+              <PropertyRef Name="roleID" />
+            </Principal>
+            <Dependent Role="Account">
+              <PropertyRef Name="role" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="sUsingFKEY">
+          <End Role="Service" Type="Self.Service" Multiplicity="1" />
+          <End Role="usingService" Type="Self.usingService" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Service">
+              <PropertyRef Name="serviceID" />
+            </Principal>
+            <Dependent Role="usingService">
+              <PropertyRef Name="serviceID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Function Name="func_Auto_departmentID" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" ReturnType="varchar">
+          <Parameter Name="departmentID" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="func_Auto_medicineID" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" ReturnType="varchar">
+          <Parameter Name="medicineid" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="func_Auto_PeopleId" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" ReturnType="varchar">
+          <Parameter Name="role" Type="tinyint" Mode="In" />
+        </Function>
+        <Function Name="func_Auto_ReceiptID" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" ReturnType="varchar">
+          <Parameter Name="receiptid" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="func_Auto_serviceID" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" ReturnType="varchar">
+          <Parameter Name="serviceid" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="func_ListMedicine_patient_Day" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" StoreFunctionName="func_ListMedicine-patient-Day">
+          <Parameter Name="patientID" Type="varchar" Mode="In" />
+          <Parameter Name="day" Type="date" Mode="In" />
+          <ReturnType>
+            <CollectionType>
+              <RowType>
+                <Property Name="medicine" Type="varchar" MaxLength="20" />
+                <Property Name="pricePerUnit" Type="int" />
+                <Property Name="amount" Type="int" />
+                <Property Name="totalPrice" Type="int" />
+              </RowType>
+            </CollectionType>
+          </ReturnType>
+        </Function>
+        <Function Name="func_totalPay_medicine" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" ReturnType="int">
+          <Parameter Name="patientID" Type="varchar" Mode="In" />
+          <Parameter Name="dateUse" Type="date" Mode="In" />
+        </Function>
+        <Function Name="func_totalPay_service" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" ReturnType="int">
+          <Parameter Name="patientID" Type="varchar" Mode="In" />
+          <Parameter Name="dateUse" Type="date" Mode="In" />
+        </Function>
+        <Function Name="func_UsingService" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="patientID" Type="varchar" Mode="In" />
+          <Parameter Name="dateUse" Type="date" Mode="In" />
+          <ReturnType>
+            <CollectionType>
+              <RowType>
+                <Property Name="patientID" Type="varchar" MaxLength="20" />
+                <Property Name="serviceID" Type="varchar" MaxLength="20" />
+                <Property Name="quantity" Type="tinyint" />
+                <Property Name="servicePrice" Type="int" />
+                <Property Name="useDay" Type="date" />
+                <Property Name="totalPay" Type="int" />
+              </RowType>
+            </CollectionType>
+          </ReturnType>
+        </Function>
+        <Function Name="InsertEmployee" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="employeeFirstName" Type="nvarchar" Mode="In" />
+          <Parameter Name="employeeLastname" Type="nvarchar" Mode="In" />
+          <Parameter Name="sex" Type="char" Mode="In" />
+          <Parameter Name="birthDay" Type="date" Mode="In" />
+          <Parameter Name="address" Type="nvarchar" Mode="In" />
+          <Parameter Name="phone" Type="varchar" Mode="In" />
+          <Parameter Name="cardID" Type="varchar" Mode="In" />
+          <Parameter Name="position" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="InsertPatient" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="patientFirstName" Type="nvarchar" Mode="In" />
+          <Parameter Name="patientLastname" Type="nvarchar" Mode="In" />
+          <Parameter Name="sex" Type="char" Mode="In" />
+          <Parameter Name="birthDay" Type="date" Mode="In" />
+          <Parameter Name="address" Type="nvarchar" Mode="In" />
+          <Parameter Name="phone" Type="varchar" Mode="In" />
+          <Parameter Name="cardID" Type="varchar" Mode="In" />
+          <Parameter Name="patientJob" Type="nvarchar" Mode="In" />
+          <Parameter Name="healthInsurance_" Type="varchar" Mode="In" />
+          <Parameter Name="reason" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="InsertRelative" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="relativeFirstName" Type="nvarchar" Mode="In" />
+          <Parameter Name="relativeLastname" Type="nvarchar" Mode="In" />
+          <Parameter Name="sex" Type="char" Mode="In" />
+          <Parameter Name="birthDay" Type="date" Mode="In" />
+          <Parameter Name="address" Type="nvarchar" Mode="In" />
+          <Parameter Name="phone" Type="varchar" Mode="In" />
+          <Parameter Name="cardID" Type="varchar" Mode="In" />
+          <Parameter Name="patientID" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="UpdateEmployee" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="employeeFirstName" Type="nvarchar" Mode="In" />
+          <Parameter Name="employeeLastname" Type="nvarchar" Mode="In" />
+          <Parameter Name="sex" Type="char" Mode="In" />
+          <Parameter Name="birthDay" Type="date" Mode="In" />
+          <Parameter Name="address" Type="nvarchar" Mode="In" />
+          <Parameter Name="phone" Type="varchar" Mode="In" />
+          <Parameter Name="cardID" Type="varchar" Mode="In" />
+          <Parameter Name="position" Type="nvarchar" Mode="In" />
+          <Parameter Name="peopleID" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="UpdatePatient" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="patientFirstName" Type="nvarchar" Mode="In" />
+          <Parameter Name="patientLastname" Type="nvarchar" Mode="In" />
+          <Parameter Name="sex" Type="char" Mode="In" />
+          <Parameter Name="birthDay" Type="date" Mode="In" />
+          <Parameter Name="address" Type="nvarchar" Mode="In" />
+          <Parameter Name="phone" Type="varchar" Mode="In" />
+          <Parameter Name="cardID" Type="varchar" Mode="In" />
+          <Parameter Name="patientJob" Type="nvarchar" Mode="In" />
+          <Parameter Name="healthInsurance_" Type="varchar" Mode="In" />
+          <Parameter Name="reason" Type="nvarchar" Mode="In" />
+          <Parameter Name="peopleID" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="UpdateRelative" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="relativeFirstName" Type="nvarchar" Mode="In" />
+          <Parameter Name="relativeLastname" Type="nvarchar" Mode="In" />
+          <Parameter Name="sex" Type="char" Mode="In" />
+          <Parameter Name="birthDay" Type="date" Mode="In" />
+          <Parameter Name="address" Type="nvarchar" Mode="In" />
+          <Parameter Name="phone" Type="varchar" Mode="In" />
+          <Parameter Name="cardID" Type="varchar" Mode="In" />
+          <Parameter Name="patientID" Type="varchar" Mode="In" />
+          <Parameter Name="relativeID" Type="varchar" Mode="In" />
+        </Function>
+        <EntityContainer Name="QuanLiHoSoBenhAnNgoaiTruModelStoreContainer">
+          <EntitySet Name="Account" EntityType="Self.Account" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Department" EntityType="Self.Department" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Employee" EntityType="Self.Employee" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Examination" EntityType="Self.Examination" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Medicine" EntityType="Self.Medicine" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Patient" EntityType="Self.Patient" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Pay" EntityType="Self.Pay" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="People" EntityType="Self.People" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Pre_Medicines" EntityType="Self.Pre_Medicines" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Prescription" EntityType="Self.Prescription" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Receipt" EntityType="Self.Receipt" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Relatives" EntityType="Self.Relatives" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Roles" EntityType="Self.Roles" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Service" EntityType="Self.Service" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="usingService" EntityType="Self.usingService" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="basicInfo_patient" EntityType="Self.basicInfo_patient" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [basicInfo_patient].[patientID] AS [patientID], 
+    [basicInfo_patient].[patientFirstName] AS [patientFirstName], 
+    [basicInfo_patient].[patientLastname] AS [patientLastname], 
+    [basicInfo_patient].[sex] AS [sex], 
+    [basicInfo_patient].[birthDay] AS [birthDay], 
+    [basicInfo_patient].[address] AS [address], 
+    [basicInfo_patient].[phone] AS [phone], 
+    [basicInfo_patient].[cardID] AS [cardID], 
+    [basicInfo_patient].[patientJob] AS [patientJob], 
+    [basicInfo_patient].[healthInsurance#] AS [healthInsurance#], 
+    [basicInfo_patient].[reason] AS [reason]
+    FROM [dbo].[basicInfo_patient] AS [basicInfo_patient]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="Examination_view" EntityType="Self.Examination_view" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [Examination_view].[examinateID] AS [examinateID], 
+    [Examination_view].[Employeename] AS [Employeename], 
+    [Examination_view].[Patientname] AS [Patientname], 
+    [Examination_view].[breathing] AS [breathing], 
+    [Examination_view].[examinateDay] AS [examinateDay], 
+    [Examination_view].[height] AS [height], 
+    [Examination_view].[symptom] AS [symptom], 
+    [Examination_view].[temperature] AS [temperature], 
+    [Examination_view].[veins] AS [veins], 
+    [Examination_view].[weight] AS [weight]
+    FROM [dbo].[Examination_view] AS [Examination_view]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="info_Doctor" EntityType="Self.info_Doctor" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [info_Doctor].[doctorID] AS [doctorID], 
+    [info_Doctor].[doctorFirstname] AS [doctorFirstname], 
+    [info_Doctor].[doctorLastName] AS [doctorLastName], 
+    [info_Doctor].[sex] AS [sex], 
+    [info_Doctor].[birthDay] AS [birthDay], 
+    [info_Doctor].[address] AS [address], 
+    [info_Doctor].[phone] AS [phone], 
+    [info_Doctor].[cardID] AS [cardID], 
+    [info_Doctor].[departmentID] AS [departmentID], 
+    [info_Doctor].[departmentName] AS [departmentName]
+    FROM [dbo].[info_Doctor] AS [info_Doctor]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="info_Employee" EntityType="Self.info_Employee" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [info_Employee].[peopleID] AS [peopleID], 
+    [info_Employee].[firstName] AS [firstName], 
+    [info_Employee].[lastName] AS [lastName], 
+    [info_Employee].[sex] AS [sex], 
+    [info_Employee].[birthDay] AS [birthDay], 
+    [info_Employee].[address] AS [address], 
+    [info_Employee].[phone] AS [phone], 
+    [info_Employee].[cardID] AS [cardID], 
+    [info_Employee].[position] AS [position], 
+    [info_Employee].[departmentID] AS [departmentID]
+    FROM [dbo].[info_Employee] AS [info_Employee]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="medicalRecord" EntityType="Self.medicalRecord" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [medicalRecord].[patientID] AS [patientID], 
+    [medicalRecord].[patientFirstName] AS [patientFirstName], 
+    [medicalRecord].[patientLastname] AS [patientLastname], 
+    [medicalRecord].[sex] AS [sex], 
+    [medicalRecord].[birthDay] AS [birthDay], 
+    [medicalRecord].[healthInsurance#] AS [healthInsurance#], 
+    [medicalRecord].[doctorID] AS [doctorID], 
+    [medicalRecord].[doctorFirstname] AS [doctorFirstname], 
+    [medicalRecord].[doctorLastName] AS [doctorLastName], 
+    [medicalRecord].[examinateDay] AS [examinateDay], 
+    [medicalRecord].[height] AS [height], 
+    [medicalRecord].[weight] AS [weight], 
+    [medicalRecord].[temperature] AS [temperature], 
+    [medicalRecord].[breathing] AS [breathing], 
+    [medicalRecord].[symptom] AS [symptom], 
+    [medicalRecord].[veins] AS [veins], 
+    [medicalRecord].[createdAt] AS [createdAt]
+    FROM [dbo].[medicalRecord] AS [medicalRecord]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="Medicines_view" EntityType="Self.Medicines_view" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [Medicines_view].[medicineID] AS [medicineID], 
+    [Medicines_view].[medicineName] AS [medicineName], 
+    [Medicines_view].[unit] AS [unit], 
+    [Medicines_view].[medicinePrice] AS [medicinePrice], 
+    [Medicines_view].[status] AS [status], 
+    [Medicines_view].[createdAt] AS [createdAt], 
+    [Medicines_view].[updateAt] AS [updateAt], 
+    [Medicines_view].[patientID] AS [patientID], 
+    [Medicines_view].[employeeID] AS [employeeID]
+    FROM [dbo].[Medicines_view] AS [Medicines_view]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="pay_view" EntityType="Self.pay_view" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [pay_view].[patientName] AS [patientName], 
+    [pay_view].[employeeName] AS [employeeName], 
+    [pay_view].[receiptName] AS [receiptName], 
+    [pay_view].[payTotal] AS [payTotal], 
+    [pay_view].[createdAt] AS [createdAt]
+    FROM [dbo].[pay_view] AS [pay_view]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="Prescription_Medicines" EntityType="Self.Prescription_Medicines" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [Prescription_Medicines].[patientID] AS [patientID], 
+    [Prescription_Medicines].[patientFirstName] AS [patientFirstName], 
+    [Prescription_Medicines].[patientLastname] AS [patientLastname], 
+    [Prescription_Medicines].[birthDay] AS [birthDay], 
+    [Prescription_Medicines].[doctorID] AS [doctorID], 
+    [Prescription_Medicines].[doctorFirstname] AS [doctorFirstname], 
+    [Prescription_Medicines].[doctorLastName] AS [doctorLastName], 
+    [Prescription_Medicines].[medicineID] AS [medicineID], 
+    [Prescription_Medicines].[medicineName] AS [medicineName], 
+    [Prescription_Medicines].[unit] AS [unit], 
+    [Prescription_Medicines].[createdAt] AS [createdAt]
+    FROM [dbo].[Prescription_Medicines] AS [Prescription_Medicines]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="Receipt_view" EntityType="Self.Receipt_view" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [Receipt_view].[receiptID] AS [receiptID], 
+    [Receipt_view].[receiptName] AS [receiptName], 
+    [Receipt_view].[status] AS [status]
+    FROM [dbo].[Receipt_view] AS [Receipt_view]</DefiningQuery>
+          </EntitySet>
+          <AssociationSet Name="belongDepartment" Association="Self.belongDepartment">
+            <End Role="Department" EntitySet="Department" />
+            <End Role="Employee" EntitySet="Employee" />
+          </AssociationSet>
+          <AssociationSet Name="employeeExam" Association="Self.employeeExam">
+            <End Role="Employee" EntitySet="Employee" />
+            <End Role="Examination" EntitySet="Examination" />
+          </AssociationSet>
+          <AssociationSet Name="employeePay" Association="Self.employeePay">
+            <End Role="Employee" EntitySet="Employee" />
+            <End Role="Pay" EntitySet="Pay" />
+          </AssociationSet>
+          <AssociationSet Name="employeePrescription" Association="Self.employeePrescription">
+            <End Role="Employee" EntitySet="Employee" />
+            <End Role="Prescription" EntitySet="Prescription" />
+          </AssociationSet>
+          <AssociationSet Name="existPerson1" Association="Self.existPerson1">
+            <End Role="People" EntitySet="People" />
+            <End Role="Relatives" EntitySet="Relatives" />
+          </AssociationSet>
+          <AssociationSet Name="existPerson2" Association="Self.existPerson2">
+            <End Role="People" EntitySet="People" />
+            <End Role="Relatives" EntitySet="Relatives" />
+          </AssociationSet>
+          <AssociationSet Name="medicinePrescription" Association="Self.medicinePrescription">
+            <End Role="Medicine" EntitySet="Medicine" />
+            <End Role="Prescription" EntitySet="Prescription" />
+          </AssociationSet>
+          <AssociationSet Name="patientExam" Association="Self.patientExam">
+            <End Role="Patient" EntitySet="Patient" />
+            <End Role="Examination" EntitySet="Examination" />
+          </AssociationSet>
+          <AssociationSet Name="patientPay" Association="Self.patientPay">
+            <End Role="Patient" EntitySet="Patient" />
+            <End Role="Pay" EntitySet="Pay" />
+          </AssociationSet>
+          <AssociationSet Name="patientPrescription" Association="Self.patientPrescription">
+            <End Role="Patient" EntitySet="Patient" />
+            <End Role="Prescription" EntitySet="Prescription" />
+          </AssociationSet>
+          <AssociationSet Name="people_employee" Association="Self.people_employee">
+            <End Role="People" EntitySet="People" />
+            <End Role="Employee" EntitySet="Employee" />
+          </AssociationSet>
+          <AssociationSet Name="people_patient" Association="Self.people_patient">
+            <End Role="People" EntitySet="People" />
+            <End Role="Patient" EntitySet="Patient" />
+          </AssociationSet>
+          <AssociationSet Name="Pre_MedicinesFK" Association="Self.Pre_MedicinesFK">
+            <End Role="Prescription" EntitySet="Prescription" />
+            <End Role="Pre_Medicines" EntitySet="Pre_Medicines" />
+          </AssociationSet>
+          <AssociationSet Name="pUsingFKEY" Association="Self.pUsingFKEY">
+            <End Role="Patient" EntitySet="Patient" />
+            <End Role="usingService" EntitySet="usingService" />
+          </AssociationSet>
+          <AssociationSet Name="receiptPay" Association="Self.receiptPay">
+            <End Role="Receipt" EntitySet="Receipt" />
+            <End Role="Pay" EntitySet="Pay" />
+          </AssociationSet>
+          <AssociationSet Name="roleFkey" Association="Self.roleFkey">
+            <End Role="Roles" EntitySet="Roles" />
+            <End Role="Account" EntitySet="Account" />
+          </AssociationSet>
+          <AssociationSet Name="sUsingFKEY" Association="Self.sUsingFKEY">
+            <End Role="Service" EntitySet="Service" />
+            <End Role="usingService" EntitySet="usingService" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="QuanLiHoSoBenhAnNgoaiTruModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <ComplexType Name="func_ListMedicine_patient_Day_Result">
+          <Property Name="medicine" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="pricePerUnit" Type="Int32" />
+          <Property Name="amount" Type="Int32" />
+          <Property Name="totalPrice" Type="Int32" />
+        </ComplexType>
+        <ComplexType Name="func_UsingService_Result">
+          <Property Name="patientID" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="serviceID" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="quantity" Type="Byte" />
+          <Property Name="servicePrice" Type="Int32" />
+          <Property Name="useDay" Type="DateTime" />
+          <Property Name="totalPay" Type="Int32" />
+        </ComplexType>
+        <EntityType Name="Account">
+          <Key>
+            <PropertyRef Name="accountId" />
+          </Key>
+          <Property Name="accountId" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="password" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="status" Type="Byte" />
+          <Property Name="role" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Roles" Relationship="Self.roleFkey" FromRole="Account" ToRole="Roles" />
+        </EntityType>
+        <EntityType Name="Department">
+          <Key>
+            <PropertyRef Name="departmentID" />
+          </Key>
+          <Property Name="departmentID" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="departmentName" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="status" Type="Byte" Nullable="false" />
+          <NavigationProperty Name="Employee" Relationship="Self.belongDepartment" FromRole="Department" ToRole="Employee" />
+        </EntityType>
+        <EntityType Name="Employee">
+          <Key>
+            <PropertyRef Name="employeeID" />
+          </Key>
+          <Property Name="employeeID" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="position" Type="String" MaxLength="25" FixedLength="false" Unicode="true" />
+          <Property Name="departmentID" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Department" Relationship="Self.belongDepartment" FromRole="Employee" ToRole="Department" />
+          <NavigationProperty Name="Examination" Relationship="Self.employeeExam" FromRole="Employee" ToRole="Examination" />
+          <NavigationProperty Name="Pay" Relationship="Self.employeePay" FromRole="Employee" ToRole="Pay" />
+          <NavigationProperty Name="Prescription" Relationship="Self.employeePrescription" FromRole="Employee" ToRole="Prescription" />
+          <NavigationProperty Name="People" Relationship="Self.people_employee" FromRole="Employee" ToRole="People" />
+        </EntityType>
+        <EntityType Name="Examination">
+          <Key>
+            <PropertyRef Name="patientID" />
+            <PropertyRef Name="employeeID" />
+            <PropertyRef Name="examinateID" />
+          </Key>
+          <Property Name="patientID" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="employeeID" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="examinateID" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="examinateDay" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="height" Type="Double" Nullable="false" />
+          <Property Name="weight" Type="Double" Nullable="false" />
+          <Property Name="temperature" Type="Double" Nullable="false" />
+          <Property Name="breathing" Type="Int32" Nullable="false" />
+          <Property Name="symptom" Type="String" MaxLength="510" FixedLength="false" Unicode="true" />
+          <Property Name="veins" Type="Int32" Nullable="false" />
+          <Property Name="status" Type="Byte" Nullable="false" />
+          <Property Name="createdAt" Type="DateTime" Nullable="false" Precision="0" />
+          <NavigationProperty Name="Employee" Relationship="Self.employeeExam" FromRole="Examination" ToRole="Employee" />
+          <NavigationProperty Name="Patient" Relationship="Self.patientExam" FromRole="Examination" ToRole="Patient" />
+        </EntityType>
+        <EntityType Name="Medicine">
+          <Key>
+            <PropertyRef Name="medicineID" />
+          </Key>
+          <Property Name="medicineID" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="medicineName" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="unit" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="medicinePrice" Type="Int32" />
+          <Property Name="status" Type="Byte" Nullable="false" />
+          <Property Name="expiry" Type="Int32" Nullable="false" />
+          <Property Name="amount" Type="Int32" Nullable="false" />
+          <Property Name="createdAt" Type="DateTime" Precision="3" />
+          <Property Name="updateAt" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="Prescription" Relationship="Self.medicinePrescription" FromRole="Medicine" ToRole="Prescription" />
+        </EntityType>
+        <EntityType Name="Patient">
+          <Key>
+            <PropertyRef Name="patientID" />
+          </Key>
+          <Property Name="patientID" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="patientJob" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="healthInsurance_" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="reason" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Examination" Relationship="Self.patientExam" FromRole="Patient" ToRole="Examination" />
+          <NavigationProperty Name="Pay" Relationship="Self.patientPay" FromRole="Patient" ToRole="Pay" />
+          <NavigationProperty Name="Prescription" Relationship="Self.patientPrescription" FromRole="Patient" ToRole="Prescription" />
+          <NavigationProperty Name="People" Relationship="Self.people_patient" FromRole="Patient" ToRole="People" />
+          <NavigationProperty Name="usingService" Relationship="Self.pUsingFKEY" FromRole="Patient" ToRole="usingService" />
+        </EntityType>
+        <EntityType Name="Pay">
+          <Key>
+            <PropertyRef Name="patientID" />
+            <PropertyRef Name="employeeID" />
+            <PropertyRef Name="receiptID" />
+          </Key>
+          <Property Name="patientID" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="employeeID" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="receiptID" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="payTotal" Type="Int32" />
+          <Property Name="status" Type="Byte" Nullable="false" />
+          <Property Name="createdAt" Type="DateTime" Nullable="false" Precision="0" />
+          <NavigationProperty Name="Employee" Relationship="Self.employeePay" FromRole="Pay" ToRole="Employee" />
+          <NavigationProperty Name="Patient" Relationship="Self.patientPay" FromRole="Pay" ToRole="Patient" />
+          <NavigationProperty Name="Receipt" Relationship="Self.receiptPay" FromRole="Pay" ToRole="Receipt" />
+        </EntityType>
+        <EntityType Name="People">
+          <Key>
+            <PropertyRef Name="peopleID" />
+          </Key>
+          <Property Name="peopleID" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="firstName" Type="String" MaxLength="32" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="lastName" Type="String" MaxLength="32" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="slug" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="sex" Type="String" MaxLength="1" FixedLength="true" Unicode="false" Nullable="false" />
+          <Property Name="birthDay" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="address" Type="String" MaxLength="510" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="phone" Type="String" MaxLength="15" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="cardID" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
+          <Property Name="role" Type="Byte" Nullable="false" />
+          <Property Name="status" Type="Byte" Nullable="false" />
+          <Property Name="createdAt" Type="DateTime" Precision="3" />
+          <Property Name="updatedAt" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="Employee" Relationship="Self.people_employee" FromRole="People" ToRole="Employee" />
+          <NavigationProperty Name="Patient" Relationship="Self.people_patient" FromRole="People" ToRole="Patient" />
+          <NavigationProperty Name="People1" Relationship="Self.Relatives" FromRole="People" ToRole="People1" />
+          <NavigationProperty Name="People2" Relationship="Self.Relatives" FromRole="People1" ToRole="People" />
+        </EntityType>
+        <EntityType Name="Pre_Medicines">
+          <Key>
+            <PropertyRef Name="patientID" />
+            <PropertyRef Name="employeeID" />
+            <PropertyRef Name="medicineId" />
+            <PropertyRef Name="prescriptionId" />
+            <PropertyRef Name="pre_MedicineId" />
+          </Key>
+          <Property Name="patientID" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="employeeID" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="medicineId" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="prescriptionId" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="pre_MedicineId" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="amount" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Prescription" Relationship="Self.Pre_MedicinesFK" FromRole="Pre_Medicines" ToRole="Prescription" />
+        </EntityType>
+        <EntityType Name="Prescription">
+          <Key>
+            <PropertyRef Name="patientID" />
+            <PropertyRef Name="employeeID" />
+            <PropertyRef Name="medicineId" />
+            <PropertyRef Name="prescriptionId" />
+          </Key>
+          <Property Name="patientID" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="employeeID" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="medicineId" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="prescriptionId" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="createdAt" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="descriptionPrescription" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="status" Type="Byte" Nullable="false" />
+          <NavigationProperty Name="Employee" Relationship="Self.employeePrescription" FromRole="Prescription" ToRole="Employee" />
+          <NavigationProperty Name="Medicine" Relationship="Self.medicinePrescription" FromRole="Prescription" ToRole="Medicine" />
+          <NavigationProperty Name="Patient" Relationship="Self.patientPrescription" FromRole="Prescription" ToRole="Patient" />
+          <NavigationProperty Name="Pre_Medicines" Relationship="Self.Pre_MedicinesFK" FromRole="Prescription" ToRole="Pre_Medicines" />
+        </EntityType>
+        <EntityType Name="Receipt">
+          <Key>
+            <PropertyRef Name="receiptID" />
+          </Key>
+          <Property Name="receiptID" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="receiptName" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="status" Type="Byte" Nullable="false" />
+          <NavigationProperty Name="Pay" Relationship="Self.receiptPay" FromRole="Receipt" ToRole="Pay" />
+        </EntityType>
+        <EntityType Name="Roles">
+          <Key>
+            <PropertyRef Name="roleID" />
+          </Key>
+          <Property Name="roleID" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="roleName" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Account" Relationship="Self.roleFkey" FromRole="Roles" ToRole="Account" />
+        </EntityType>
+        <EntityType Name="Service">
+          <Key>
+            <PropertyRef Name="serviceID" />
+          </Key>
+          <Property Name="serviceID" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="serviceName" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="servicePrice" Type="Int32" />
+          <Property Name="status" Type="Byte" Nullable="false" />
+          <NavigationProperty Name="usingService" Relationship="Self.sUsingFKEY" FromRole="Service" ToRole="usingService" />
+        </EntityType>
+        <EntityType Name="usingService">
+          <Key>
+            <PropertyRef Name="patientID" />
+            <PropertyRef Name="serviceID" />
+          </Key>
+          <Property Name="patientID" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="serviceID" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="useday" Type="DateTime" Precision="0" />
+          <Property Name="quantity" Type="Byte" />
+          <Property Name="status" Type="Byte" Nullable="false" />
+          <NavigationProperty Name="Patient" Relationship="Self.pUsingFKEY" FromRole="usingService" ToRole="Patient" />
+          <NavigationProperty Name="Service" Relationship="Self.sUsingFKEY" FromRole="usingService" ToRole="Service" />
+        </EntityType>
+        <EntityType Name="basicInfo_patient">
+          <Key>
+            <PropertyRef Name="patientID" />
+            <PropertyRef Name="patientFirstName" />
+            <PropertyRef Name="patientLastname" />
+            <PropertyRef Name="sex" />
+            <PropertyRef Name="birthDay" />
+            <PropertyRef Name="address" />
+            <PropertyRef Name="phone" />
+          </Key>
+          <Property Name="patientID" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="patientFirstName" Type="String" MaxLength="32" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="patientLastname" Type="String" MaxLength="32" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="sex" Type="String" MaxLength="1" FixedLength="true" Unicode="false" Nullable="false" />
+          <Property Name="birthDay" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="address" Type="String" MaxLength="510" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="phone" Type="String" MaxLength="15" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="cardID" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
+          <Property Name="patientJob" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="healthInsurance_" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="reason" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="Examination_view">
+          <Key>
+            <PropertyRef Name="examinateID" />
+            <PropertyRef Name="Employeename" />
+            <PropertyRef Name="Patientname" />
+            <PropertyRef Name="breathing" />
+            <PropertyRef Name="examinateDay" />
+            <PropertyRef Name="height" />
+            <PropertyRef Name="temperature" />
+            <PropertyRef Name="veins" />
+            <PropertyRef Name="weight" />
+          </Key>
+          <Property Name="examinateID" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Employeename" Type="String" MaxLength="32" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Patientname" Type="String" MaxLength="32" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="breathing" Type="Int32" Nullable="false" />
+          <Property Name="examinateDay" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="height" Type="Double" Nullable="false" />
+          <Property Name="symptom" Type="String" MaxLength="510" FixedLength="false" Unicode="true" />
+          <Property Name="temperature" Type="Double" Nullable="false" />
+          <Property Name="veins" Type="Int32" Nullable="false" />
+          <Property Name="weight" Type="Double" Nullable="false" />
+        </EntityType>
+        <EntityType Name="info_Doctor">
+          <Key>
+            <PropertyRef Name="doctorID" />
+            <PropertyRef Name="doctorFirstname" />
+            <PropertyRef Name="doctorLastName" />
+            <PropertyRef Name="sex" />
+            <PropertyRef Name="birthDay" />
+            <PropertyRef Name="address" />
+            <PropertyRef Name="phone" />
+          </Key>
+          <Property Name="doctorID" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="doctorFirstname" Type="String" MaxLength="32" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="doctorLastName" Type="String" MaxLength="32" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="sex" Type="String" MaxLength="1" FixedLength="true" Unicode="false" Nullable="false" />
+          <Property Name="birthDay" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="address" Type="String" MaxLength="510" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="phone" Type="String" MaxLength="15" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="cardID" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
+          <Property Name="departmentID" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="departmentName" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="info_Employee">
+          <Key>
+            <PropertyRef Name="peopleID" />
+            <PropertyRef Name="firstName" />
+            <PropertyRef Name="lastName" />
+            <PropertyRef Name="sex" />
+            <PropertyRef Name="birthDay" />
+            <PropertyRef Name="address" />
+            <PropertyRef Name="phone" />
+          </Key>
+          <Property Name="peopleID" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="firstName" Type="String" MaxLength="32" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="lastName" Type="String" MaxLength="32" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="sex" Type="String" MaxLength="1" FixedLength="true" Unicode="false" Nullable="false" />
+          <Property Name="birthDay" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="address" Type="String" MaxLength="510" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="phone" Type="String" MaxLength="15" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="cardID" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
+          <Property Name="position" Type="String" MaxLength="25" FixedLength="false" Unicode="true" />
+          <Property Name="departmentID" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="medicalRecord">
+          <Key>
+            <PropertyRef Name="patientID" />
+            <PropertyRef Name="patientFirstName" />
+            <PropertyRef Name="patientLastname" />
+            <PropertyRef Name="sex" />
+            <PropertyRef Name="birthDay" />
+            <PropertyRef Name="doctorID" />
+            <PropertyRef Name="doctorFirstname" />
+            <PropertyRef Name="doctorLastName" />
+            <PropertyRef Name="examinateDay" />
+            <PropertyRef Name="height" />
+            <PropertyRef Name="weight" />
+            <PropertyRef Name="temperature" />
+            <PropertyRef Name="breathing" />
+            <PropertyRef Name="veins" />
+            <PropertyRef Name="createdAt" />
+          </Key>
+          <Property Name="patientID" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="patientFirstName" Type="String" MaxLength="32" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="patientLastname" Type="String" MaxLength="32" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="sex" Type="String" MaxLength="1" FixedLength="true" Unicode="false" Nullable="false" />
+          <Property Name="birthDay" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="healthInsurance_" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="doctorID" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="doctorFirstname" Type="String" MaxLength="32" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="doctorLastName" Type="String" MaxLength="32" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="examinateDay" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="height" Type="Double" Nullable="false" />
+          <Property Name="weight" Type="Double" Nullable="false" />
+          <Property Name="temperature" Type="Double" Nullable="false" />
+          <Property Name="breathing" Type="Int32" Nullable="false" />
+          <Property Name="symptom" Type="String" MaxLength="510" FixedLength="false" Unicode="true" />
+          <Property Name="veins" Type="Int32" Nullable="false" />
+          <Property Name="createdAt" Type="DateTime" Nullable="false" Precision="0" />
+        </EntityType>
+        <EntityType Name="Medicines_view">
+          <Key>
+            <PropertyRef Name="medicineID" />
+            <PropertyRef Name="status" />
+            <PropertyRef Name="patientID" />
+            <PropertyRef Name="employeeID" />
+          </Key>
+          <Property Name="medicineID" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="medicineName" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="unit" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="medicinePrice" Type="Int32" />
+          <Property Name="status" Type="Byte" Nullable="false" />
+          <Property Name="createdAt" Type="DateTime" Precision="3" />
+          <Property Name="updateAt" Type="DateTime" Precision="3" />
+          <Property Name="patientID" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="employeeID" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+        </EntityType>
+        <EntityType Name="pay_view">
+          <Key>
+            <PropertyRef Name="patientName" />
+            <PropertyRef Name="employeeName" />
+            <PropertyRef Name="createdAt" />
+          </Key>
+          <Property Name="patientName" Type="String" MaxLength="32" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="employeeName" Type="String" MaxLength="32" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="receiptName" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="payTotal" Type="Int32" />
+          <Property Name="createdAt" Type="DateTime" Nullable="false" Precision="0" />
+        </EntityType>
+        <EntityType Name="Prescription_Medicines">
+          <Key>
+            <PropertyRef Name="patientID" />
+            <PropertyRef Name="patientFirstName" />
+            <PropertyRef Name="patientLastname" />
+            <PropertyRef Name="birthDay" />
+            <PropertyRef Name="doctorID" />
+            <PropertyRef Name="doctorFirstname" />
+            <PropertyRef Name="doctorLastName" />
+            <PropertyRef Name="medicineID" />
+          </Key>
+          <Property Name="patientID" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="patientFirstName" Type="String" MaxLength="32" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="patientLastname" Type="String" MaxLength="32" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="birthDay" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="doctorID" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="doctorFirstname" Type="String" MaxLength="32" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="doctorLastName" Type="String" MaxLength="32" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="medicineID" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="medicineName" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="unit" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="createdAt" Type="DateTime" Precision="3" />
+        </EntityType>
+        <EntityType Name="Receipt_view">
+          <Key>
+            <PropertyRef Name="receiptID" />
+            <PropertyRef Name="status" />
+          </Key>
+          <Property Name="receiptID" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="receiptName" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="status" Type="Byte" Nullable="false" />
+        </EntityType>
+        <Association Name="roleFkey">
+          <End Role="Roles" Type="Self.Roles" Multiplicity="0..1" />
+          <End Role="Account" Type="Self.Account" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Roles">
+              <PropertyRef Name="roleID" />
+            </Principal>
+            <Dependent Role="Account">
+              <PropertyRef Name="role" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="belongDepartment">
+          <End Role="Department" Type="Self.Department" Multiplicity="0..1" />
+          <End Role="Employee" Type="Self.Employee" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Department">
+              <PropertyRef Name="departmentID" />
+            </Principal>
+            <Dependent Role="Employee">
+              <PropertyRef Name="departmentID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="employeeExam">
+          <End Role="Employee" Type="Self.Employee" Multiplicity="1" />
+          <End Role="Examination" Type="Self.Examination" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Employee">
+              <PropertyRef Name="employeeID" />
+            </Principal>
+            <Dependent Role="Examination">
+              <PropertyRef Name="employeeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="employeePay">
+          <End Role="Employee" Type="Self.Employee" Multiplicity="1" />
+          <End Role="Pay" Type="Self.Pay" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Employee">
+              <PropertyRef Name="employeeID" />
+            </Principal>
+            <Dependent Role="Pay">
+              <PropertyRef Name="employeeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="employeePrescription">
+          <End Role="Employee" Type="Self.Employee" Multiplicity="1" />
+          <End Role="Prescription" Type="Self.Prescription" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Employee">
+              <PropertyRef Name="employeeID" />
+            </Principal>
+            <Dependent Role="Prescription">
+              <PropertyRef Name="employeeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="people_employee">
+          <End Role="People" Type="Self.People" Multiplicity="1" />
+          <End Role="Employee" Type="Self.Employee" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="People">
+              <PropertyRef Name="peopleID" />
+            </Principal>
+            <Dependent Role="Employee">
+              <PropertyRef Name="employeeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="patientExam">
+          <End Role="Patient" Type="Self.Patient" Multiplicity="1" />
+          <End Role="Examination" Type="Self.Examination" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Patient">
+              <PropertyRef Name="patientID" />
+            </Principal>
+            <Dependent Role="Examination">
+              <PropertyRef Name="patientID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="medicinePrescription">
+          <End Role="Medicine" Type="Self.Medicine" Multiplicity="1" />
+          <End Role="Prescription" Type="Self.Prescription" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Medicine">
+              <PropertyRef Name="medicineID" />
+            </Principal>
+            <Dependent Role="Prescription">
+              <PropertyRef Name="medicineId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="patientPay">
+          <End Role="Patient" Type="Self.Patient" Multiplicity="1" />
+          <End Role="Pay" Type="Self.Pay" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Patient">
+              <PropertyRef Name="patientID" />
+            </Principal>
+            <Dependent Role="Pay">
+              <PropertyRef Name="patientID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="patientPrescription">
+          <End Role="Patient" Type="Self.Patient" Multiplicity="1" />
+          <End Role="Prescription" Type="Self.Prescription" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Patient">
+              <PropertyRef Name="patientID" />
+            </Principal>
+            <Dependent Role="Prescription">
+              <PropertyRef Name="patientID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="people_patient">
+          <End Role="People" Type="Self.People" Multiplicity="1" />
+          <End Role="Patient" Type="Self.Patient" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="People">
+              <PropertyRef Name="peopleID" />
+            </Principal>
+            <Dependent Role="Patient">
+              <PropertyRef Name="patientID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="pUsingFKEY">
+          <End Role="Patient" Type="Self.Patient" Multiplicity="1" />
+          <End Role="usingService" Type="Self.usingService" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Patient">
+              <PropertyRef Name="patientID" />
+            </Principal>
+            <Dependent Role="usingService">
+              <PropertyRef Name="patientID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="receiptPay">
+          <End Role="Receipt" Type="Self.Receipt" Multiplicity="1" />
+          <End Role="Pay" Type="Self.Pay" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Receipt">
+              <PropertyRef Name="receiptID" />
+            </Principal>
+            <Dependent Role="Pay">
+              <PropertyRef Name="receiptID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Pre_MedicinesFK">
+          <End Role="Prescription" Type="Self.Prescription" Multiplicity="1" />
+          <End Role="Pre_Medicines" Type="Self.Pre_Medicines" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Prescription">
+              <PropertyRef Name="patientID" />
+              <PropertyRef Name="employeeID" />
+              <PropertyRef Name="medicineId" />
+              <PropertyRef Name="prescriptionId" />
+            </Principal>
+            <Dependent Role="Pre_Medicines">
+              <PropertyRef Name="patientID" />
+              <PropertyRef Name="employeeID" />
+              <PropertyRef Name="medicineId" />
+              <PropertyRef Name="prescriptionId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="sUsingFKEY">
+          <End Role="Service" Type="Self.Service" Multiplicity="1" />
+          <End Role="usingService" Type="Self.usingService" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Service">
+              <PropertyRef Name="serviceID" />
+            </Principal>
+            <Dependent Role="usingService">
+              <PropertyRef Name="serviceID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Relatives">
+          <End Role="People" Type="Self.People" Multiplicity="*" />
+          <End Role="People1" Type="Self.People" Multiplicity="*" />
+        </Association>
+        <EntityContainer Name="QuanLiHoSoBenhAnNgoaiTruEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Account" EntityType="Self.Account" />
+          <EntitySet Name="Department" EntityType="Self.Department" />
+          <EntitySet Name="Employee" EntityType="Self.Employee" />
+          <EntitySet Name="Examination" EntityType="Self.Examination" />
+          <EntitySet Name="Medicine" EntityType="Self.Medicine" />
+          <EntitySet Name="Patient" EntityType="Self.Patient" />
+          <EntitySet Name="Pay" EntityType="Self.Pay" />
+          <EntitySet Name="People" EntityType="Self.People" />
+          <EntitySet Name="Pre_Medicines" EntityType="Self.Pre_Medicines" />
+          <EntitySet Name="Prescription" EntityType="Self.Prescription" />
+          <EntitySet Name="Receipt" EntityType="Self.Receipt" />
+          <EntitySet Name="Roles" EntityType="Self.Roles" />
+          <EntitySet Name="Service" EntityType="Self.Service" />
+          <EntitySet Name="usingService" EntityType="Self.usingService" />
+          <EntitySet Name="basicInfo_patient" EntityType="Self.basicInfo_patient" />
+          <EntitySet Name="Examination_view" EntityType="Self.Examination_view" />
+          <EntitySet Name="info_Doctor" EntityType="Self.info_Doctor" />
+          <EntitySet Name="info_Employee" EntityType="Self.info_Employee" />
+          <EntitySet Name="medicalRecord" EntityType="Self.medicalRecord" />
+          <EntitySet Name="Medicines_view" EntityType="Self.Medicines_view" />
+          <EntitySet Name="pay_view" EntityType="Self.pay_view" />
+          <EntitySet Name="Prescription_Medicines" EntityType="Self.Prescription_Medicines" />
+          <EntitySet Name="Receipt_view" EntityType="Self.Receipt_view" />
+          <AssociationSet Name="roleFkey" Association="Self.roleFkey">
+            <End Role="Roles" EntitySet="Roles" />
+            <End Role="Account" EntitySet="Account" />
+          </AssociationSet>
+          <AssociationSet Name="belongDepartment" Association="Self.belongDepartment">
+            <End Role="Department" EntitySet="Department" />
+            <End Role="Employee" EntitySet="Employee" />
+          </AssociationSet>
+          <AssociationSet Name="employeeExam" Association="Self.employeeExam">
+            <End Role="Employee" EntitySet="Employee" />
+            <End Role="Examination" EntitySet="Examination" />
+          </AssociationSet>
+          <AssociationSet Name="employeePay" Association="Self.employeePay">
+            <End Role="Employee" EntitySet="Employee" />
+            <End Role="Pay" EntitySet="Pay" />
+          </AssociationSet>
+          <AssociationSet Name="employeePrescription" Association="Self.employeePrescription">
+            <End Role="Employee" EntitySet="Employee" />
+            <End Role="Prescription" EntitySet="Prescription" />
+          </AssociationSet>
+          <AssociationSet Name="people_employee" Association="Self.people_employee">
+            <End Role="People" EntitySet="People" />
+            <End Role="Employee" EntitySet="Employee" />
+          </AssociationSet>
+          <AssociationSet Name="patientExam" Association="Self.patientExam">
+            <End Role="Patient" EntitySet="Patient" />
+            <End Role="Examination" EntitySet="Examination" />
+          </AssociationSet>
+          <AssociationSet Name="medicinePrescription" Association="Self.medicinePrescription">
+            <End Role="Medicine" EntitySet="Medicine" />
+            <End Role="Prescription" EntitySet="Prescription" />
+          </AssociationSet>
+          <AssociationSet Name="patientPay" Association="Self.patientPay">
+            <End Role="Patient" EntitySet="Patient" />
+            <End Role="Pay" EntitySet="Pay" />
+          </AssociationSet>
+          <AssociationSet Name="patientPrescription" Association="Self.patientPrescription">
+            <End Role="Patient" EntitySet="Patient" />
+            <End Role="Prescription" EntitySet="Prescription" />
+          </AssociationSet>
+          <AssociationSet Name="people_patient" Association="Self.people_patient">
+            <End Role="People" EntitySet="People" />
+            <End Role="Patient" EntitySet="Patient" />
+          </AssociationSet>
+          <AssociationSet Name="pUsingFKEY" Association="Self.pUsingFKEY">
+            <End Role="Patient" EntitySet="Patient" />
+            <End Role="usingService" EntitySet="usingService" />
+          </AssociationSet>
+          <AssociationSet Name="receiptPay" Association="Self.receiptPay">
+            <End Role="Receipt" EntitySet="Receipt" />
+            <End Role="Pay" EntitySet="Pay" />
+          </AssociationSet>
+          <AssociationSet Name="Pre_MedicinesFK" Association="Self.Pre_MedicinesFK">
+            <End Role="Prescription" EntitySet="Prescription" />
+            <End Role="Pre_Medicines" EntitySet="Pre_Medicines" />
+          </AssociationSet>
+          <AssociationSet Name="sUsingFKEY" Association="Self.sUsingFKEY">
+            <End Role="Service" EntitySet="Service" />
+            <End Role="usingService" EntitySet="usingService" />
+          </AssociationSet>
+          <AssociationSet Name="Relatives" Association="Self.Relatives">
+            <End Role="People" EntitySet="People" />
+            <End Role="People1" EntitySet="People" />
+          </AssociationSet>
+          <FunctionImport Name="func_ListMedicine_patient_Day" IsComposable="true" ReturnType="Collection(QuanLiHoSoBenhAnNgoaiTruModel.func_ListMedicine_patient_Day_Result)">
+            <Parameter Name="patientID" Mode="In" Type="String" />
+            <Parameter Name="day" Mode="In" Type="DateTime" />
+          </FunctionImport>
+          <FunctionImport Name="func_UsingService" IsComposable="true" ReturnType="Collection(QuanLiHoSoBenhAnNgoaiTruModel.func_UsingService_Result)">
+            <Parameter Name="patientID" Mode="In" Type="String" />
+            <Parameter Name="dateUse" Mode="In" Type="DateTime" />
+          </FunctionImport>
+          <FunctionImport Name="InsertEmployee">
+            <Parameter Name="employeeFirstName" Mode="In" Type="String" />
+            <Parameter Name="employeeLastname" Mode="In" Type="String" />
+            <Parameter Name="sex" Mode="In" Type="String" />
+            <Parameter Name="birthDay" Mode="In" Type="DateTime" />
+            <Parameter Name="address" Mode="In" Type="String" />
+            <Parameter Name="phone" Mode="In" Type="String" />
+            <Parameter Name="cardID" Mode="In" Type="String" />
+            <Parameter Name="position" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="InsertPatient">
+            <Parameter Name="patientFirstName" Mode="In" Type="String" />
+            <Parameter Name="patientLastname" Mode="In" Type="String" />
+            <Parameter Name="sex" Mode="In" Type="String" />
+            <Parameter Name="birthDay" Mode="In" Type="DateTime" />
+            <Parameter Name="address" Mode="In" Type="String" />
+            <Parameter Name="phone" Mode="In" Type="String" />
+            <Parameter Name="cardID" Mode="In" Type="String" />
+            <Parameter Name="patientJob" Mode="In" Type="String" />
+            <Parameter Name="healthInsurance_" Mode="In" Type="String" />
+            <Parameter Name="reason" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="InsertRelative">
+            <Parameter Name="relativeFirstName" Mode="In" Type="String" />
+            <Parameter Name="relativeLastname" Mode="In" Type="String" />
+            <Parameter Name="sex" Mode="In" Type="String" />
+            <Parameter Name="birthDay" Mode="In" Type="DateTime" />
+            <Parameter Name="address" Mode="In" Type="String" />
+            <Parameter Name="phone" Mode="In" Type="String" />
+            <Parameter Name="cardID" Mode="In" Type="String" />
+            <Parameter Name="patientID" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="UpdateEmployee">
+            <Parameter Name="employeeFirstName" Mode="In" Type="String" />
+            <Parameter Name="employeeLastname" Mode="In" Type="String" />
+            <Parameter Name="sex" Mode="In" Type="String" />
+            <Parameter Name="birthDay" Mode="In" Type="DateTime" />
+            <Parameter Name="address" Mode="In" Type="String" />
+            <Parameter Name="phone" Mode="In" Type="String" />
+            <Parameter Name="cardID" Mode="In" Type="String" />
+            <Parameter Name="position" Mode="In" Type="String" />
+            <Parameter Name="peopleID" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="UpdatePatient">
+            <Parameter Name="patientFirstName" Mode="In" Type="String" />
+            <Parameter Name="patientLastname" Mode="In" Type="String" />
+            <Parameter Name="sex" Mode="In" Type="String" />
+            <Parameter Name="birthDay" Mode="In" Type="DateTime" />
+            <Parameter Name="address" Mode="In" Type="String" />
+            <Parameter Name="phone" Mode="In" Type="String" />
+            <Parameter Name="cardID" Mode="In" Type="String" />
+            <Parameter Name="patientJob" Mode="In" Type="String" />
+            <Parameter Name="healthInsurance_" Mode="In" Type="String" />
+            <Parameter Name="reason" Mode="In" Type="String" />
+            <Parameter Name="peopleID" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="UpdateRelative">
+            <Parameter Name="relativeFirstName" Mode="In" Type="String" />
+            <Parameter Name="relativeLastname" Mode="In" Type="String" />
+            <Parameter Name="sex" Mode="In" Type="String" />
+            <Parameter Name="birthDay" Mode="In" Type="DateTime" />
+            <Parameter Name="address" Mode="In" Type="String" />
+            <Parameter Name="phone" Mode="In" Type="String" />
+            <Parameter Name="cardID" Mode="In" Type="String" />
+            <Parameter Name="patientID" Mode="In" Type="String" />
+            <Parameter Name="relativeID" Mode="In" Type="String" />
+          </FunctionImport>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="QuanLiHoSoBenhAnNgoaiTruModelStoreContainer" CdmEntityContainer="QuanLiHoSoBenhAnNgoaiTruEntities">
+          <EntitySetMapping Name="Account">
+            <EntityTypeMapping TypeName="QuanLiHoSoBenhAnNgoaiTruModel.Account">
+              <MappingFragment StoreEntitySet="Account">
+                <ScalarProperty Name="accountId" ColumnName="accountId" />
+                <ScalarProperty Name="password" ColumnName="password" />
+                <ScalarProperty Name="status" ColumnName="status" />
+                <ScalarProperty Name="role" ColumnName="role" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Department">
+            <EntityTypeMapping TypeName="QuanLiHoSoBenhAnNgoaiTruModel.Department">
+              <MappingFragment StoreEntitySet="Department">
+                <ScalarProperty Name="departmentID" ColumnName="departmentID" />
+                <ScalarProperty Name="departmentName" ColumnName="departmentName" />
+                <ScalarProperty Name="status" ColumnName="status" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Employee">
+            <EntityTypeMapping TypeName="QuanLiHoSoBenhAnNgoaiTruModel.Employee">
+              <MappingFragment StoreEntitySet="Employee">
+                <ScalarProperty Name="employeeID" ColumnName="employeeID" />
+                <ScalarProperty Name="position" ColumnName="position" />
+                <ScalarProperty Name="departmentID" ColumnName="departmentID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Examination">
+            <EntityTypeMapping TypeName="QuanLiHoSoBenhAnNgoaiTruModel.Examination">
+              <MappingFragment StoreEntitySet="Examination">
+                <ScalarProperty Name="patientID" ColumnName="patientID" />
+                <ScalarProperty Name="employeeID" ColumnName="employeeID" />
+                <ScalarProperty Name="examinateID" ColumnName="examinateID" />
+                <ScalarProperty Name="examinateDay" ColumnName="examinateDay" />
+                <ScalarProperty Name="height" ColumnName="height" />
+                <ScalarProperty Name="weight" ColumnName="weight" />
+                <ScalarProperty Name="temperature" ColumnName="temperature" />
+                <ScalarProperty Name="breathing" ColumnName="breathing" />
+                <ScalarProperty Name="symptom" ColumnName="symptom" />
+                <ScalarProperty Name="veins" ColumnName="veins" />
+                <ScalarProperty Name="status" ColumnName="status" />
+                <ScalarProperty Name="createdAt" ColumnName="createdAt" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Medicine">
+            <EntityTypeMapping TypeName="QuanLiHoSoBenhAnNgoaiTruModel.Medicine">
+              <MappingFragment StoreEntitySet="Medicine">
+                <ScalarProperty Name="medicineID" ColumnName="medicineID" />
+                <ScalarProperty Name="medicineName" ColumnName="medicineName" />
+                <ScalarProperty Name="unit" ColumnName="unit" />
+                <ScalarProperty Name="medicinePrice" ColumnName="medicinePrice" />
+                <ScalarProperty Name="status" ColumnName="status" />
+                <ScalarProperty Name="expiry" ColumnName="expiry" />
+                <ScalarProperty Name="amount" ColumnName="amount" />
+                <ScalarProperty Name="createdAt" ColumnName="createdAt" />
+                <ScalarProperty Name="updateAt" ColumnName="updateAt" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Patient">
+            <EntityTypeMapping TypeName="QuanLiHoSoBenhAnNgoaiTruModel.Patient">
+              <MappingFragment StoreEntitySet="Patient">
+                <ScalarProperty Name="patientID" ColumnName="patientID" />
+                <ScalarProperty Name="patientJob" ColumnName="patientJob" />
+                <ScalarProperty Name="healthInsurance_" ColumnName="healthInsurance#" />
+                <ScalarProperty Name="reason" ColumnName="reason" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Pay">
+            <EntityTypeMapping TypeName="QuanLiHoSoBenhAnNgoaiTruModel.Pay">
+              <MappingFragment StoreEntitySet="Pay">
+                <ScalarProperty Name="patientID" ColumnName="patientID" />
+                <ScalarProperty Name="employeeID" ColumnName="employeeID" />
+                <ScalarProperty Name="receiptID" ColumnName="receiptID" />
+                <ScalarProperty Name="payTotal" ColumnName="payTotal" />
+                <ScalarProperty Name="status" ColumnName="status" />
+                <ScalarProperty Name="createdAt" ColumnName="createdAt" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="People">
+            <EntityTypeMapping TypeName="QuanLiHoSoBenhAnNgoaiTruModel.People">
+              <MappingFragment StoreEntitySet="People">
+                <ScalarProperty Name="peopleID" ColumnName="peopleID" />
+                <ScalarProperty Name="firstName" ColumnName="firstName" />
+                <ScalarProperty Name="lastName" ColumnName="lastName" />
+                <ScalarProperty Name="slug" ColumnName="slug" />
+                <ScalarProperty Name="sex" ColumnName="sex" />
+                <ScalarProperty Name="birthDay" ColumnName="birthDay" />
+                <ScalarProperty Name="address" ColumnName="address" />
+                <ScalarProperty Name="phone" ColumnName="phone" />
+                <ScalarProperty Name="cardID" ColumnName="cardID" />
+                <ScalarProperty Name="role" ColumnName="role" />
+                <ScalarProperty Name="status" ColumnName="status" />
+                <ScalarProperty Name="createdAt" ColumnName="createdAt" />
+                <ScalarProperty Name="updatedAt" ColumnName="updatedAt" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Pre_Medicines">
+            <EntityTypeMapping TypeName="QuanLiHoSoBenhAnNgoaiTruModel.Pre_Medicines">
+              <MappingFragment StoreEntitySet="Pre_Medicines">
+                <ScalarProperty Name="patientID" ColumnName="patientID" />
+                <ScalarProperty Name="employeeID" ColumnName="employeeID" />
+                <ScalarProperty Name="medicineId" ColumnName="medicineId" />
+                <ScalarProperty Name="prescriptionId" ColumnName="prescriptionId" />
+                <ScalarProperty Name="pre_MedicineId" ColumnName="pre_MedicineId" />
+                <ScalarProperty Name="amount" ColumnName="amount" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Prescription">
+            <EntityTypeMapping TypeName="QuanLiHoSoBenhAnNgoaiTruModel.Prescription">
+              <MappingFragment StoreEntitySet="Prescription">
+                <ScalarProperty Name="patientID" ColumnName="patientID" />
+                <ScalarProperty Name="employeeID" ColumnName="employeeID" />
+                <ScalarProperty Name="medicineId" ColumnName="medicineId" />
+                <ScalarProperty Name="prescriptionId" ColumnName="prescriptionId" />
+                <ScalarProperty Name="createdAt" ColumnName="createdAt" />
+                <ScalarProperty Name="descriptionPrescription" ColumnName="descriptionPrescription" />
+                <ScalarProperty Name="status" ColumnName="status" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Receipt">
+            <EntityTypeMapping TypeName="QuanLiHoSoBenhAnNgoaiTruModel.Receipt">
+              <MappingFragment StoreEntitySet="Receipt">
+                <ScalarProperty Name="receiptID" ColumnName="receiptID" />
+                <ScalarProperty Name="receiptName" ColumnName="receiptName" />
+                <ScalarProperty Name="status" ColumnName="status" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Roles">
+            <EntityTypeMapping TypeName="QuanLiHoSoBenhAnNgoaiTruModel.Roles">
+              <MappingFragment StoreEntitySet="Roles">
+                <ScalarProperty Name="roleID" ColumnName="roleID" />
+                <ScalarProperty Name="roleName" ColumnName="roleName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Service">
+            <EntityTypeMapping TypeName="QuanLiHoSoBenhAnNgoaiTruModel.Service">
+              <MappingFragment StoreEntitySet="Service">
+                <ScalarProperty Name="serviceID" ColumnName="serviceID" />
+                <ScalarProperty Name="serviceName" ColumnName="serviceName" />
+                <ScalarProperty Name="servicePrice" ColumnName="servicePrice" />
+                <ScalarProperty Name="status" ColumnName="status" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="usingService">
+            <EntityTypeMapping TypeName="QuanLiHoSoBenhAnNgoaiTruModel.usingService">
+              <MappingFragment StoreEntitySet="usingService">
+                <ScalarProperty Name="patientID" ColumnName="patientID" />
+                <ScalarProperty Name="serviceID" ColumnName="serviceID" />
+                <ScalarProperty Name="useday" ColumnName="useday" />
+                <ScalarProperty Name="quantity" ColumnName="quantity" />
+                <ScalarProperty Name="status" ColumnName="status" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="basicInfo_patient">
+            <EntityTypeMapping TypeName="QuanLiHoSoBenhAnNgoaiTruModel.basicInfo_patient">
+              <MappingFragment StoreEntitySet="basicInfo_patient">
+                <ScalarProperty Name="patientID" ColumnName="patientID" />
+                <ScalarProperty Name="patientFirstName" ColumnName="patientFirstName" />
+                <ScalarProperty Name="patientLastname" ColumnName="patientLastname" />
+                <ScalarProperty Name="sex" ColumnName="sex" />
+                <ScalarProperty Name="birthDay" ColumnName="birthDay" />
+                <ScalarProperty Name="address" ColumnName="address" />
+                <ScalarProperty Name="phone" ColumnName="phone" />
+                <ScalarProperty Name="cardID" ColumnName="cardID" />
+                <ScalarProperty Name="patientJob" ColumnName="patientJob" />
+                <ScalarProperty Name="healthInsurance_" ColumnName="healthInsurance#" />
+                <ScalarProperty Name="reason" ColumnName="reason" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Examination_view">
+            <EntityTypeMapping TypeName="QuanLiHoSoBenhAnNgoaiTruModel.Examination_view">
+              <MappingFragment StoreEntitySet="Examination_view">
+                <ScalarProperty Name="examinateID" ColumnName="examinateID" />
+                <ScalarProperty Name="Employeename" ColumnName="Employeename" />
+                <ScalarProperty Name="Patientname" ColumnName="Patientname" />
+                <ScalarProperty Name="breathing" ColumnName="breathing" />
+                <ScalarProperty Name="examinateDay" ColumnName="examinateDay" />
+                <ScalarProperty Name="height" ColumnName="height" />
+                <ScalarProperty Name="symptom" ColumnName="symptom" />
+                <ScalarProperty Name="temperature" ColumnName="temperature" />
+                <ScalarProperty Name="veins" ColumnName="veins" />
+                <ScalarProperty Name="weight" ColumnName="weight" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="info_Doctor">
+            <EntityTypeMapping TypeName="QuanLiHoSoBenhAnNgoaiTruModel.info_Doctor">
+              <MappingFragment StoreEntitySet="info_Doctor">
+                <ScalarProperty Name="doctorID" ColumnName="doctorID" />
+                <ScalarProperty Name="doctorFirstname" ColumnName="doctorFirstname" />
+                <ScalarProperty Name="doctorLastName" ColumnName="doctorLastName" />
+                <ScalarProperty Name="sex" ColumnName="sex" />
+                <ScalarProperty Name="birthDay" ColumnName="birthDay" />
+                <ScalarProperty Name="address" ColumnName="address" />
+                <ScalarProperty Name="phone" ColumnName="phone" />
+                <ScalarProperty Name="cardID" ColumnName="cardID" />
+                <ScalarProperty Name="departmentID" ColumnName="departmentID" />
+                <ScalarProperty Name="departmentName" ColumnName="departmentName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="info_Employee">
+            <EntityTypeMapping TypeName="QuanLiHoSoBenhAnNgoaiTruModel.info_Employee">
+              <MappingFragment StoreEntitySet="info_Employee">
+                <ScalarProperty Name="peopleID" ColumnName="peopleID" />
+                <ScalarProperty Name="firstName" ColumnName="firstName" />
+                <ScalarProperty Name="lastName" ColumnName="lastName" />
+                <ScalarProperty Name="sex" ColumnName="sex" />
+                <ScalarProperty Name="birthDay" ColumnName="birthDay" />
+                <ScalarProperty Name="address" ColumnName="address" />
+                <ScalarProperty Name="phone" ColumnName="phone" />
+                <ScalarProperty Name="cardID" ColumnName="cardID" />
+                <ScalarProperty Name="position" ColumnName="position" />
+                <ScalarProperty Name="departmentID" ColumnName="departmentID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="medicalRecord">
+            <EntityTypeMapping TypeName="QuanLiHoSoBenhAnNgoaiTruModel.medicalRecord">
+              <MappingFragment StoreEntitySet="medicalRecord">
+                <ScalarProperty Name="patientID" ColumnName="patientID" />
+                <ScalarProperty Name="patientFirstName" ColumnName="patientFirstName" />
+                <ScalarProperty Name="patientLastname" ColumnName="patientLastname" />
+                <ScalarProperty Name="sex" ColumnName="sex" />
+                <ScalarProperty Name="birthDay" ColumnName="birthDay" />
+                <ScalarProperty Name="healthInsurance_" ColumnName="healthInsurance#" />
+                <ScalarProperty Name="doctorID" ColumnName="doctorID" />
+                <ScalarProperty Name="doctorFirstname" ColumnName="doctorFirstname" />
+                <ScalarProperty Name="doctorLastName" ColumnName="doctorLastName" />
+                <ScalarProperty Name="examinateDay" ColumnName="examinateDay" />
+                <ScalarProperty Name="height" ColumnName="height" />
+                <ScalarProperty Name="weight" ColumnName="weight" />
+                <ScalarProperty Name="temperature" ColumnName="temperature" />
+                <ScalarProperty Name="breathing" ColumnName="breathing" />
+                <ScalarProperty Name="symptom" ColumnName="symptom" />
+                <ScalarProperty Name="veins" ColumnName="veins" />
+                <ScalarProperty Name="createdAt" ColumnName="createdAt" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Medicines_view">
+            <EntityTypeMapping TypeName="QuanLiHoSoBenhAnNgoaiTruModel.Medicines_view">
+              <MappingFragment StoreEntitySet="Medicines_view">
+                <ScalarProperty Name="medicineID" ColumnName="medicineID" />
+                <ScalarProperty Name="medicineName" ColumnName="medicineName" />
+                <ScalarProperty Name="unit" ColumnName="unit" />
+                <ScalarProperty Name="medicinePrice" ColumnName="medicinePrice" />
+                <ScalarProperty Name="status" ColumnName="status" />
+                <ScalarProperty Name="createdAt" ColumnName="createdAt" />
+                <ScalarProperty Name="updateAt" ColumnName="updateAt" />
+                <ScalarProperty Name="patientID" ColumnName="patientID" />
+                <ScalarProperty Name="employeeID" ColumnName="employeeID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="pay_view">
+            <EntityTypeMapping TypeName="QuanLiHoSoBenhAnNgoaiTruModel.pay_view">
+              <MappingFragment StoreEntitySet="pay_view">
+                <ScalarProperty Name="patientName" ColumnName="patientName" />
+                <ScalarProperty Name="employeeName" ColumnName="employeeName" />
+                <ScalarProperty Name="receiptName" ColumnName="receiptName" />
+                <ScalarProperty Name="payTotal" ColumnName="payTotal" />
+                <ScalarProperty Name="createdAt" ColumnName="createdAt" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Prescription_Medicines">
+            <EntityTypeMapping TypeName="QuanLiHoSoBenhAnNgoaiTruModel.Prescription_Medicines">
+              <MappingFragment StoreEntitySet="Prescription_Medicines">
+                <ScalarProperty Name="patientID" ColumnName="patientID" />
+                <ScalarProperty Name="patientFirstName" ColumnName="patientFirstName" />
+                <ScalarProperty Name="patientLastname" ColumnName="patientLastname" />
+                <ScalarProperty Name="birthDay" ColumnName="birthDay" />
+                <ScalarProperty Name="doctorID" ColumnName="doctorID" />
+                <ScalarProperty Name="doctorFirstname" ColumnName="doctorFirstname" />
+                <ScalarProperty Name="doctorLastName" ColumnName="doctorLastName" />
+                <ScalarProperty Name="medicineID" ColumnName="medicineID" />
+                <ScalarProperty Name="medicineName" ColumnName="medicineName" />
+                <ScalarProperty Name="unit" ColumnName="unit" />
+                <ScalarProperty Name="createdAt" ColumnName="createdAt" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Receipt_view">
+            <EntityTypeMapping TypeName="QuanLiHoSoBenhAnNgoaiTruModel.Receipt_view">
+              <MappingFragment StoreEntitySet="Receipt_view">
+                <ScalarProperty Name="receiptID" ColumnName="receiptID" />
+                <ScalarProperty Name="receiptName" ColumnName="receiptName" />
+                <ScalarProperty Name="status" ColumnName="status" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <AssociationSetMapping Name="Relatives" TypeName="QuanLiHoSoBenhAnNgoaiTruModel.Relatives" StoreEntitySet="Relatives">
+            <EndProperty Name="People">
+              <ScalarProperty Name="peopleID" ColumnName="patientID" />
+            </EndProperty>
+            <EndProperty Name="People1">
+              <ScalarProperty Name="peopleID" ColumnName="relativeID" />
+            </EndProperty>
+          </AssociationSetMapping>
+          <FunctionImportMapping FunctionName="QuanLiHoSoBenhAnNgoaiTruModel.Store.func_ListMedicine_patient_Day" FunctionImportName="func_ListMedicine_patient_Day">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="QuanLiHoSoBenhAnNgoaiTruModel.func_ListMedicine_patient_Day_Result">
+                <ScalarProperty Name="medicine" ColumnName="medicine" />
+                <ScalarProperty Name="pricePerUnit" ColumnName="pricePerUnit" />
+                <ScalarProperty Name="amount" ColumnName="amount" />
+                <ScalarProperty Name="totalPrice" ColumnName="totalPrice" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionName="QuanLiHoSoBenhAnNgoaiTruModel.Store.func_UsingService" FunctionImportName="func_UsingService">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="QuanLiHoSoBenhAnNgoaiTruModel.func_UsingService_Result">
+                <ScalarProperty Name="patientID" ColumnName="patientID" />
+                <ScalarProperty Name="serviceID" ColumnName="serviceID" />
+                <ScalarProperty Name="quantity" ColumnName="quantity" />
+                <ScalarProperty Name="servicePrice" ColumnName="servicePrice" />
+                <ScalarProperty Name="useDay" ColumnName="useDay" />
+                <ScalarProperty Name="totalPay" ColumnName="totalPay" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="InsertEmployee" FunctionName="QuanLiHoSoBenhAnNgoaiTruModel.Store.InsertEmployee" />
+          <FunctionImportMapping FunctionImportName="InsertPatient" FunctionName="QuanLiHoSoBenhAnNgoaiTruModel.Store.InsertPatient" />
+          <FunctionImportMapping FunctionImportName="InsertRelative" FunctionName="QuanLiHoSoBenhAnNgoaiTruModel.Store.InsertRelative" />
+          <FunctionImportMapping FunctionImportName="UpdateEmployee" FunctionName="QuanLiHoSoBenhAnNgoaiTruModel.Store.UpdateEmployee" />
+          <FunctionImportMapping FunctionImportName="UpdatePatient" FunctionName="QuanLiHoSoBenhAnNgoaiTruModel.Store.UpdatePatient" />
+          <FunctionImportMapping FunctionImportName="UpdateRelative" FunctionName="QuanLiHoSoBenhAnNgoaiTruModel.Store.UpdateRelative" />
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

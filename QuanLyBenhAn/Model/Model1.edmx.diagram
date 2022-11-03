@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="9aebf6b101eb411da09fcc9ea6888b6d" Name="Diagram1" ZoomLevel="74">
+        <EntityTypeShape EntityType="QuanLiHoSoBenhAnNgoaiTruModel.Account" Width="1.5" PointX="11" PointY="8.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="QuanLiHoSoBenhAnNgoaiTruModel.Department" Width="1.5" PointX="1.5" PointY="1.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="QuanLiHoSoBenhAnNgoaiTruModel.Employee" Width="1.5" PointX="3.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="QuanLiHoSoBenhAnNgoaiTruModel.Examination" Width="1.5" PointX="3" PointY="8.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="QuanLiHoSoBenhAnNgoaiTruModel.Medicine" Width="1.5" PointX="3.75" PointY="14.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="QuanLiHoSoBenhAnNgoaiTruModel.Patient" Width="1.5" PointX="0.75" PointY="8.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="QuanLiHoSoBenhAnNgoaiTruModel.Pay" Width="1.5" PointX="6" PointY="8.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="QuanLiHoSoBenhAnNgoaiTruModel.People" Width="1.5" PointX="1.5" PointY="13.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="QuanLiHoSoBenhAnNgoaiTruModel.Pre_Medicines" Width="1.5" PointX="8.25" PointY="4.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="QuanLiHoSoBenhAnNgoaiTruModel.Prescription" Width="1.5" PointX="6" PointY="4.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="QuanLiHoSoBenhAnNgoaiTruModel.Receipt" Width="1.5" PointX="3.75" PointY="18.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="QuanLiHoSoBenhAnNgoaiTruModel.Roles" Width="1.5" PointX="8.75" PointY="9.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="QuanLiHoSoBenhAnNgoaiTruModel.Service" Width="1.5" PointX="0.75" PointY="5" IsExpanded="true" />
+        <EntityTypeShape EntityType="QuanLiHoSoBenhAnNgoaiTruModel.usingService" Width="1.5" PointX="3" PointY="4.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="QuanLiHoSoBenhAnNgoaiTruModel.basicInfo_patient" Width="1.5" PointX="10.75" PointY="1.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="QuanLiHoSoBenhAnNgoaiTruModel.Examination_view" Width="1.5" PointX="5.75" PointY="12.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="QuanLiHoSoBenhAnNgoaiTruModel.info_Doctor" Width="1.5" PointX="7.75" PointY="12.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="QuanLiHoSoBenhAnNgoaiTruModel.info_Employee" Width="1.5" PointX="9.75" PointY="12.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="QuanLiHoSoBenhAnNgoaiTruModel.medicalRecord" Width="1.5" PointX="11.75" PointY="12.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="QuanLiHoSoBenhAnNgoaiTruModel.Medicines_view" Width="1.5" PointX="12.75" PointY="1.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="QuanLiHoSoBenhAnNgoaiTruModel.pay_view" Width="1.5" PointX="12.75" PointY="5.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="QuanLiHoSoBenhAnNgoaiTruModel.Prescription_Medicines" Width="1.5" PointX="13.75" PointY="8.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="QuanLiHoSoBenhAnNgoaiTruModel.Receipt_view" Width="1.5" PointX="5.75" PointY="1.75" IsExpanded="true" />
+        <AssociationConnector Association="QuanLiHoSoBenhAnNgoaiTruModel.roleFkey" ManuallyRouted="false" />
+        <AssociationConnector Association="QuanLiHoSoBenhAnNgoaiTruModel.belongDepartment" ManuallyRouted="false" />
+        <AssociationConnector Association="QuanLiHoSoBenhAnNgoaiTruModel.employeeExam" ManuallyRouted="false" />
+        <AssociationConnector Association="QuanLiHoSoBenhAnNgoaiTruModel.employeePay" ManuallyRouted="false" />
+        <AssociationConnector Association="QuanLiHoSoBenhAnNgoaiTruModel.employeePrescription" ManuallyRouted="false" />
+        <AssociationConnector Association="QuanLiHoSoBenhAnNgoaiTruModel.people_employee" ManuallyRouted="false" />
+        <AssociationConnector Association="QuanLiHoSoBenhAnNgoaiTruModel.patientExam" ManuallyRouted="false" />
+        <AssociationConnector Association="QuanLiHoSoBenhAnNgoaiTruModel.medicinePrescription" ManuallyRouted="false" />
+        <AssociationConnector Association="QuanLiHoSoBenhAnNgoaiTruModel.patientPay" ManuallyRouted="false" />
+        <AssociationConnector Association="QuanLiHoSoBenhAnNgoaiTruModel.patientPrescription" ManuallyRouted="false" />
+        <AssociationConnector Association="QuanLiHoSoBenhAnNgoaiTruModel.people_patient" ManuallyRouted="false" />
+        <AssociationConnector Association="QuanLiHoSoBenhAnNgoaiTruModel.pUsingFKEY" ManuallyRouted="false" />
+        <AssociationConnector Association="QuanLiHoSoBenhAnNgoaiTruModel.receiptPay" ManuallyRouted="false" />
+        <AssociationConnector Association="QuanLiHoSoBenhAnNgoaiTruModel.Pre_MedicinesFK" ManuallyRouted="false" />
+        <AssociationConnector Association="QuanLiHoSoBenhAnNgoaiTruModel.sUsingFKEY" ManuallyRouted="false" />
+        <AssociationConnector Association="QuanLiHoSoBenhAnNgoaiTruModel.Relatives" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
